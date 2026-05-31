@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && npx pagefind --site dist/client --output-subdir pagefind",
+    "build": "astro build && npx pagefind --site dist --output-subdir pagefind",
     "preview": "astro preview",
     "format": "prettier --write ."
   },
@@ -13,7 +13,6 @@
   "author": "蜗壳进阶联盟",
   "license": "MIT",
   "dependencies": {
-    "@astrojs/cloudflare": "^13.6.0",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/typography": "^0.5.19",
