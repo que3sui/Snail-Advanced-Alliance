@@ -1,0 +1,42 @@
+<h2>整体概念：网页即放映</h2>
+<p class="subtitle">4 层电影感叠加，从开场到落幕一气呵成</p>
+
+<div class="section">
+  <h3>🎬 第 1 层：画幅比变化（Aspect Ratio Shift）</h3>
+  <p>
+    页面初始以 2.35:1 超宽画幅（上下黑边）呈现
+    Hero，滚动后黑边缓缓收窄，过渡到全屏内容——像《星际穿越》IMAX
+    画幅展开的瞬间。这是最直接的"电影感"标志。
+  </p>
+</div>
+
+<div class="section">
+  <h3>🎥 第 2 层：场景式叙事（Scene Sequencer）</h3>
+  <p>
+    每个 &lt;section&gt; 是一个"场"。进入视口时不是简单的
+    fade-in，而是有镜头语言：推轨（scale）、横移（translateX）、升格（慢速浮现）。不同
+    section 用不同"运镜"——Hero 是推轨 +
+    渐亮，数据面板是横移切入，卡片区是升格慢显。
+  </p>
+</div>
+
+<div class="section">
+  <h3>✨ 第 3 层：追光交互（Spotlight Interaction）</h3>
+  <p>
+    现有的墨晕光标保留但增强——卡片 hover 时有景深跟随（像摄影机微调焦点）、按钮
+    hover
+    时背景微微变暗（像舞台上追光打在演员身上）。一切交互都在暗示"你正在观看"。
+  </p>
+</div>
+
+<div class="section">
+  <h3>🎞 第 4 层：胶片质感（Film Stock）</h3>
+  <p>
+    全局叠加：轻微胶片颗粒、上下暗角晕影、色彩偏移（暖金偏向胶片调色）。古典元素精简为：金粉粒子（仅在关键场景出现）、装饰线（更细更克制）、稻纸纹理（替换为胶片颗粒）。
+  </p>
+</div>
+
+<div class="section">
+  <p class="label">接下来</p>
+  <p>我会逐一展开每层的具体实现方案，先确认这个整体框架是否对味？</p>
+</div>

@@ -1,0 +1,90 @@
+<h2>第 4 层：胶片质感 (Film Stock)</h2>
+<p class="subtitle">全局氛围层——不是"加滤镜"，而是像电影胶片一样有温度和触感</p>
+
+<div class="section">
+  <h3>3 个全局氛围层</h3>
+
+  <div style="display: grid; gap: 12px; grid-template-columns: 1fr 1fr 1fr">
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">① 胶片颗粒</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        替换现有的稻纸纹理（SVG
+        noise），换为<strong>更细腻、有方向性的胶片颗粒</strong>。颗粒密度在不同区域有微妙变化——暗区颗粒更明显，亮区几乎不可见。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        用 CSS filter + 多层 SVG noise，opacity 约 0.02-0.04
+      </p>
+    </div>
+
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">② 暗角晕影</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        页面四角有<strong>极克制的暗角</strong>（vignette），不是 Instagram
+        滤镜那种强暗角，而是电影放映时画幅边缘的自然暗沉——几乎察觉不到，但它让视觉焦点始终保持在画面中央。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        radial-gradient 叠加，透明度 max 0.15，边缘最暗
+      </p>
+    </div>
+
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">③ 暖调色彩偏移</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        页面整体偏暖金，但高光区微微偏冷（像 Kodak Portra
+        胶片的色彩特性）。不直接改色，而是在 body::before
+        的渐变中<strong>微调色温分布</strong>。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        调整现有 ambient gradient 的色相分布
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>古典元素的去留</h3>
+  <div class="split">
+    <div>
+      <p class="label">保留</p>
+      <ul style="color: #ccc">
+        <li>金色装饰线（ornamental-rule）→ 更细、更低调</li>
+        <li>古典边角（classical-corners）→ 保留，仅 hover 可见</li>
+        <li>墨晕光标 → 增强为追光</li>
+      </ul>
+    </div>
+    <div>
+      <p class="label">替换 / 移除</p>
+      <ul style="color: #999">
+        <li>稻纸纹理 → 胶片颗粒</li>
+        <li>钻石装饰点（ornamental-diamond）→ 去掉，过于具象</li>
+        <li>金色粒子（sparkle）→ 精简为仅在 Hero 的追光中出现</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <p class="label">下一步</p>
+  <p>4 层方案全部确认后，我会写完整设计文档，然后开始逐步实现。确认这层吗？</p>
+</div>

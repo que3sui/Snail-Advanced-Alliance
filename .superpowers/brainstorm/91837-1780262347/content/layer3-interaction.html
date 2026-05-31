@@ -1,0 +1,99 @@
+<h2>第 3 层：追光交互 (Spotlight Interaction)</h2>
+<p class="subtitle">
+  每一次交互都是"追光打在演员身上"——卡片、按钮、图片都有焦点回应
+</p>
+
+<div class="section">
+  <h3>4 个交互细节</h3>
+
+  <div style="display: grid; gap: 12px; grid-template-columns: 1fr 1fr">
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">① 卡片景深跟随</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        卡片 hover 时不是简单的 translateY，而是根据鼠标在卡片上的位置产生微小的
+        3D
+        倾斜——<strong>鼠标在左边，卡片微微向右倾；鼠标在上方，卡片微微向下倾</strong>。就像摄影机在手边微调角度。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        参考：Apple TV 电影卡片、MUBI 海报墙
+      </p>
+    </div>
+
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">② 按钮追光反馈</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        按钮 hover 时，其后方出现一个<strong>柔光 halo</strong
+        >（不是硬阴影），像舞台上演员被聚光灯打到时身后的光晕。同时周围其他元素微微变暗。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        已有的 btn-shimmer 保留，在此基础上叠加 halo
+      </p>
+    </div>
+
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">③ 墨晕光标增强</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        已有的 cursor-glow
+        保留，新增：光标在可交互元素上方时<strong>光晕变暖、变大</strong>——像追光找到了目标。在空白区域时保持低调。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        用 CSS :has() 或 dataset 感知当前 hover 类型
+      </p>
+    </div>
+
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 18px;
+      "
+    >
+      <p class="label" style="margin-top: 0">④ 滚动时画面"对焦"</p>
+      <p style="color: #ccc; font-size: 0.82rem">
+        当用户停止滚动时，当前屏幕内的主要内容有一个<strong
+          >极微弱的 sharpen / brightness 过渡</strong
+        >——像相机在自动对焦后锁定的那一瞬。
+      </p>
+      <p style="color: #666; font-size: 0.7rem">
+        scroll-end 事件驱动，非高频触发
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>设计原则</h3>
+  <ul>
+    <li>
+      <strong>不抢戏</strong>——这些是"微"交互，持续时间 300-600ms，位移不超过
+      4px
+    </li>
+    <li><strong>有回应</strong>——每个交互必须有即时的视觉反馈，不能有空窗</li>
+    <li>
+      <strong>可用性优先</strong>——所有动效在
+      <code>prefers-reduced-motion</code> 时禁用
+    </li>
+  </ul>
+</div>

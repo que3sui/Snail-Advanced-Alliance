@@ -1,0 +1,220 @@
+<h2>第 1 层：画幅比变化 (Aspect Ratio Shift)</h2>
+<p class="subtitle">网页的"开幕仪式"——从超宽画幅到全屏沉浸</p>
+
+<div class="section">
+  <h3>实现方案</h3>
+  <p>
+    两个固定在视口上下边缘的黑色遮幅（letterbox bars），初始状态压缩可视区域为
+    2.35:1 超宽比例。滚动时遮幅向上/下收起，将画面"还给"全屏——整个过程发生在
+    Hero 区域的滚动区间内。
+  </p>
+</div>
+
+<div class="section">
+  <h3>视觉节奏</h3>
+  <div style="display: grid; gap: 16px; grid-template-columns: 1fr 1fr 1fr">
+    <div
+      style="
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+      "
+    >
+      <p style="color: #888; font-size: 0.75rem; margin: 0 0 12px">
+        阶段 1：进入页面
+      </p>
+      <div
+        style="
+          background: #000;
+          margin: 0 auto;
+          height: 100px;
+          width: 100%;
+          position: relative;
+          border-radius: 4px;
+        "
+      >
+        <div
+          style="
+            background: #c88810;
+            height: 1px;
+            left: 50%;
+            margin-left: -40px;
+            position: absolute;
+            top: 50%;
+            width: 80px;
+          "
+        ></div>
+        <div
+          style="
+            background: rgba(200, 136, 16, 0.08);
+            border-radius: 50%;
+            filter: blur(20px);
+            height: 40px;
+            left: 50%;
+            margin-left: -20px;
+            margin-top: -20px;
+            position: absolute;
+            top: 50%;
+            width: 40px;
+          "
+        ></div>
+      </div>
+      <p style="color: #aaa; font-size: 0.7rem; margin: 8px 0 0">
+        宽幅黑边 + 中心光点
+      </p>
+    </div>
+    <div
+      style="
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+      "
+    >
+      <p style="color: #888; font-size: 0.75rem; margin: 0 0 12px">
+        阶段 2：开始滚动
+      </p>
+      <div
+        style="
+          background: #000;
+          margin: 0 auto;
+          height: 100px;
+          width: 100%;
+          position: relative;
+          border-radius: 4px;
+        "
+      >
+        <div
+          style="
+            background: rgba(200, 136, 16, 0.15);
+            border-radius: 50%;
+            filter: blur(30px);
+            height: 60px;
+            left: 50%;
+            margin-left: -30px;
+            margin-top: -30px;
+            position: absolute;
+            top: 50%;
+            width: 60px;
+          "
+        ></div>
+        <div
+          style="
+            background: linear-gradient(135deg, #c88810, #e05535);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 0.5rem;
+            font-weight: 900;
+            left: 50%;
+            letter-spacing: 0.05em;
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          蜗壳进阶联盟
+        </div>
+      </div>
+      <p style="color: #aaa; font-size: 0.7rem; margin: 8px 0 0">
+        黑边开始收窄 + 标题浮现
+      </p>
+    </div>
+    <div
+      style="
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 12px;
+        padding: 20px;
+        text-align: center;
+      "
+    >
+      <p style="color: #888; font-size: 0.75rem; margin: 0 0 12px">
+        阶段 3：完全展开
+      </p>
+      <div
+        style="
+          background: #faf5ec;
+          margin: 0 auto;
+          height: 100px;
+          width: 100%;
+          position: relative;
+          border-radius: 4px;
+        "
+      >
+        <div
+          style="
+            background: linear-gradient(135deg, #c88810, #e05535);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-size: 0.6rem;
+            font-weight: 900;
+            left: 50%;
+            letter-spacing: 0.03em;
+            position: absolute;
+            top: 30%;
+            transform: translate(-50%, -50%);
+          "
+        >
+          蜗壳进阶联盟
+        </div>
+        <div
+          style="
+            color: #8a8276;
+            font-size: 0.44rem;
+            left: 50%;
+            position: absolute;
+            text-align: center;
+            top: 65%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+          "
+        >
+          USTC 青年学生组织
+        </div>
+      </div>
+      <p style="color: #aaa; font-size: 0.7rem; margin: 8px 0 0">
+        全屏内容 + Hero 完整展示
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>技术要点</h3>
+  <ul>
+    <li>
+      两个 <code>&lt;div&gt;</code>（letterbox-top / letterbox-bottom），<code
+        >position: fixed</code
+      >，z-index 高于内容
+    </li>
+    <li>初始高度通过 Calc 动态计算：遮幅高度 = (100vh - 100vw/2.35) / 2</li>
+    <li>
+      用 <code>animation-timeline: view()</code> 驱动遮幅在 Hero
+      区域内收起（CSS-only，零 JS）
+    </li>
+    <li>遮幅收起时伴随标题从光点中浮现——形成"大幕拉开"的叙事</li>
+  </ul>
+</div>
+
+<div class="pros-cons">
+  <div class="pros">
+    <h4>Pros</h4>
+    <ul>
+      <li>最大的视觉冲击力 / 投入感比最低</li>
+      <li>CSS-only 实现，不增加 JS 体积</li>
+      <li>立即传达"这不是普通网站"的信号</li>
+    </ul>
+  </div>
+  <div class="cons">
+    <h4>Cons</h4>
+    <ul>
+      <li>移动端体验需调整（竖屏用 16:9 幕布比例更合适）</li>
+      <li>画幅比变化不宜重复使用——只在首页开场一次</li>
+    </ul>
+  </div>
+</div>

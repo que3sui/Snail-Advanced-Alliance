@@ -1,0 +1,159 @@
+<h2>第 1 层（修订）："追光启幕"</h2>
+<p class="subtitle">不是机械的黑边——而是黑暗中的一束光，照亮一个世界</p>
+
+<div class="section">
+  <h3>叙事节奏</h3>
+  <div style="display: grid; gap: 12px; grid-template-columns: 1fr 1fr 1fr 1fr">
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+      "
+    >
+      <div
+        style="
+          background: radial-gradient(
+            circle,
+            rgba(200, 136, 16, 0.6) 0%,
+            transparent 70%
+          );
+          border-radius: 50%;
+          height: 40px;
+          margin: 24px auto;
+          width: 40px;
+        "
+      ></div>
+      <p style="color: #ccc; font-size: 0.75rem; margin: 0">暗场 · 余烬</p>
+      <p style="color: #666; font-size: 0.65rem; margin: 4px 0 0">
+        仅一粒金光明灭<br />万物尚未苏醒
+      </p>
+    </div>
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+      "
+    >
+      <div
+        style="
+          background: radial-gradient(
+            ellipse 120% 80% at 50% 50%,
+            rgba(200, 136, 16, 0.25) 0%,
+            transparent 60%
+          );
+          border-radius: 50%;
+          height: 60px;
+          margin: 14px auto;
+          width: 60px;
+        "
+      ></div>
+      <p style="color: #ccc; font-size: 0.75rem; margin: 0">光启 · 破晓</p>
+      <p style="color: #666; font-size: 0.65rem; margin: 4px 0 0">
+        光晕扩散<br />暖意开始蔓延
+      </p>
+    </div>
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+      "
+    >
+      <div
+        style="
+          background: radial-gradient(
+            ellipse 100% 60% at 50% 50%,
+            rgba(200, 136, 16, 0.15) 0%,
+            rgba(224, 85, 53, 0.08) 40%,
+            transparent 70%
+          );
+          height: 80px;
+          margin: 4px auto;
+          width: 90%;
+        "
+      ></div>
+      <p style="color: #ccc; font-size: 0.75rem; margin: 0">显现 · 标题</p>
+      <p style="color: #666; font-size: 0.65rem; margin: 4px 0 0">
+        金色文字从光中<br />凝聚成形
+      </p>
+    </div>
+    <div
+      style="
+        background: #0d0d0d;
+        border: 1px solid #222;
+        border-radius: 10px;
+        padding: 16px;
+        text-align: center;
+      "
+    >
+      <div
+        style="
+          background: linear-gradient(
+            180deg,
+            rgba(200, 136, 16, 0.05) 0%,
+            transparent 60%
+          );
+          height: 80px;
+          margin: 4px auto;
+          width: 90%;
+        "
+      ></div>
+      <p style="color: #ccc; font-size: 0.75rem; margin: 0">布景 · 全开</p>
+      <p style="color: #666; font-size: 0.65rem; margin: 4px 0 0">
+        光稳定为氛围照明<br />页面完整呈现
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>核心视觉</h3>
+  <p>
+    页面不再以白色/暖白展开。开场是<strong>深暗的底色</strong>，一束从中心向上方渐亮的追光（warm
+    spotlight），标题从这束光中浸出——像是黑暗舞台上，聚光灯亮起照亮主角的瞬间。
+  </p>
+  <p>不是"加个动画"，而是整个页面的<strong>亮场过程</strong>：</p>
+  <ul>
+    <li>初始：深暗背景 + 中心微光呼吸</li>
+    <li>阶段 1：光晕膨胀，暗角退散</li>
+    <li>阶段 2：标题字符从光中浮现（每个字有微小时差）</li>
+    <li>阶段 3：副标题、按钮、装饰金线陆续入场</li>
+    <li>收束：光稳定为页面全局氛围，过渡到内容区</li>
+  </ul>
+</div>
+
+<div class="section">
+  <h3>与之前方案的本质区别</h3>
+  <div class="split">
+    <div>
+      <p class="label">之前（被拒）</p>
+      <p style="color: #999">机械黑边 → 不叙事、无情感、像视频播放器不是电影</p>
+    </div>
+    <div>
+      <p class="label">现在</p>
+      <p>
+        光影叙事 →
+        黑暗中的仪式感、期待、揭示。视觉上"大气"来自明暗对比和节奏控制，而非机械变化。
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>技术上</h3>
+  <p>
+    Hero 区域包装一个深色全屏容器，背景用多层 CSS radial-gradient
+    模拟聚光灯。<br />用现有的
+    <code>data-section-theme</code> 机制切换全局氛围——开场用
+    "dark"（暗场），滚动至内容区后过渡到现有的 "gold" 暖光。
+  </p>
+  <p>标题逐字浮现用 CSS animation-delay 逐步 stagger，无需 JS。</p>
+</div>
