@@ -574,44 +574,10 @@ body[data-section-theme="plum"]::before {
 }
 
 /* ═══════════════════════
-   View Transitions — seamless page switching
+   View Transitions — Astro 6 scoped transitions
+   Astro generates scoped view-transition-name for main + header.
+   These rules fine-tune timing and z-index only.
    ═══════════════════════ */
-
-@view-transition {
-  navigation: auto;
-}
-
-/* Old page: slide out left + fade */
-::view-transition-old(root) {
-  animation: vt-slide-out 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-/* New page: slide in from right + fade */
-::view-transition-new(root) {
-  animation: vt-slide-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
-}
-
-@keyframes vt-slide-out {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(-40px);
-    opacity: 0;
-  }
-}
-
-@keyframes vt-slide-in {
-  from {
-    transform: translateX(40px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
 
 /* Header morph transition — keeps header stable across navigations */
 ::view-transition-group(header) {
@@ -626,10 +592,6 @@ body[data-section-theme="plum"]::before {
 
 /* Reduce motion for view transitions */
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none !important;
-  }
   ::view-transition-group(root) {
     animation-duration: 0s !important;
   }
