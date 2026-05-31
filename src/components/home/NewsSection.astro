@@ -33,7 +33,10 @@ const badgeStyles = [
 ];
 ---
 
-<section class="bg-gemini-surface py-[var(--section-gap)]" id="content-start">
+<section
+  class="bg-gemini-surface scene-ribbon py-[var(--section-gap)]"
+  id="content-start"
+>
   <div class="mx-auto max-w-5xl px-6">
     <SectionHeading
       title={lang === "en" ? "Latest Updates" : "最新动态"}
@@ -80,7 +83,8 @@ const badgeStyles = [
             <ScrollReveal>
               <a
                 href={href}
-                class={`glass glass-hover classical-corners group block rounded-2xl border-l-4 ${border} p-6`}
+                class={`glass glass-hover classical-corners scene-push-in group block rounded-2xl border-l-4 ${border} p-6`}
+                style={`animation-delay: ${i * 150}ms`}
               >
                 <div class="mb-4 flex items-center gap-3">
                   <span

@@ -53,7 +53,7 @@ const activities = [
 ];
 ---
 
-<section class="py-[var(--section-gap)]">
+<section class="scene-ribbon py-[var(--section-gap)]">
   <div class="mx-auto max-w-[var(--content-max)] px-6">
     <SectionHeading
       title={lang === "en" ? "Our Activities" : "品牌活动"}
@@ -64,11 +64,15 @@ const activities = [
 
     <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {
-        activities.map((item) => (
+        activities.map((item, i) => (
           <ScrollReveal class="group">
             <a
               href={item.href}
-              class="glass glass-hover classical-corners block h-full rounded-2xl p-6"
+              class={`glass glass-hover classical-corners card-tilt block h-full rounded-2xl p-6 ${
+                i % 2 === 0 ? "scene-pan-in" : "scene-pan-in-reverse"
+              }`}
+              style={`animation-delay: ${i * 120}ms`}
+              data-tilt
             >
               <div
                 class={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient}`}
