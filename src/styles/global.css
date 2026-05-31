@@ -490,6 +490,187 @@ body[data-section-theme="plum"]::before {
 }
 
 /* ═══════════════════════
+   Link Underline Sweep
+   Global link hover: a warm gold underline sweeps in from left.
+   ═══════════════════════ */
+
+@utility link-underline {
+  text-decoration: none;
+  background-image: linear-gradient(
+    to right,
+    var(--color-accent),
+    var(--color-accent)
+  );
+  background-size: 0% 1.5px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  &:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* Apply link-underline globally to prose-style links */
+@layer base {
+  .prose a,
+  article a {
+    text-decoration: none;
+    background-image: linear-gradient(
+      to right,
+      var(--color-accent),
+      var(--color-accent)
+    );
+    background-size: 0% 1.5px;
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .prose a:hover,
+  article a:hover {
+    background-size: 100% 1.5px;
+  }
+}
+
+/* ═══════════════════════
+   Button Shimmer
+   A light sweep across CTA buttons on hover.
+   ═══════════════════════ */
+
+@utility btn-shimmer {
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.4) 45%,
+      rgba(255, 255, 255, 0.15) 50%,
+      transparent 55%
+    );
+    transform: translateX(-100%);
+    transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+    pointer-events: none;
+  }
+
+  &:hover::before {
+    transform: translateX(200%);
+  }
+}
+
+/* ═══════════════════════
+   Classical Design Touches
+   Subtle rice-paper grain, gold ornamental dividers,
+   and classical corner accents.
+   ═══════════════════════ */
+
+/* Rice-paper grain — a barely-visible noise texture across the page */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stich'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* Gold ornamental divider — a restrained classical rule between sections */
+.ornamental-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  height: 24px;
+  margin: 0 auto;
+  max-width: 360px;
+}
+
+.ornamental-rule::before,
+.ornamental-rule::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(200, 136, 16, 0.35),
+    rgba(200, 136, 16, 0.35)
+  );
+}
+
+.ornamental-rule::before {
+  background: linear-gradient(
+    to left,
+    rgba(200, 136, 16, 0.35),
+    rgba(200, 136, 16, 0.35),
+    transparent
+  );
+}
+
+.ornamental-rule::after {
+  background: linear-gradient(
+    to right,
+    rgba(200, 136, 16, 0.35),
+    rgba(200, 136, 16, 0.35),
+    transparent
+  );
+}
+
+/* Center diamond accent */
+.ornamental-diamond {
+  width: 6px;
+  height: 6px;
+  background: rgba(200, 136, 16, 0.45);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* Classical corner accents — subtle gold L-shaped marks on cards */
+.classical-corners {
+  position: relative;
+}
+
+.classical-corners::before,
+.classical-corners::after {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.classical-corners::before {
+  top: 8px;
+  left: 8px;
+  border-top: 1px solid rgba(200, 136, 16, 0.25);
+  border-left: 1px solid rgba(200, 136, 16, 0.25);
+}
+
+.classical-corners::after {
+  bottom: 8px;
+  right: 8px;
+  border-bottom: 1px solid rgba(200, 136, 16, 0.25);
+  border-right: 1px solid rgba(200, 136, 16, 0.25);
+}
+
+.classical-corners:hover::before,
+.classical-corners:hover::after {
+  opacity: 1;
+  border-color: rgba(200, 136, 16, 0.5);
+}
+
+/* ═══════════════════════
    Glassmorphism (light)
    ═══════════════════════ */
 
@@ -508,9 +689,11 @@ body[data-section-theme="plum"]::before {
   &:hover {
     background: var(--color-glass-hover);
     border-color: rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
     box-shadow:
-      0 4px 24px rgba(0, 0, 0, 0.05),
-      0 0 0 4px rgba(200, 136, 16, 0.04);
+      0 8px 32px rgba(0, 0, 0, 0.06),
+      0 0 0 4px rgba(200, 136, 16, 0.06),
+      0 0 60px rgba(200, 136, 16, 0.04);
   }
 }
 
@@ -574,24 +757,78 @@ body[data-section-theme="plum"]::before {
 }
 
 /* ═══════════════════════
-   View Transitions — Astro 6 scoped transitions
-   Astro generates scoped view-transition-name for main + header.
-   These rules fine-tune timing and z-index only.
+   View Transitions — 浮现 (emergence)
+   Old page rests still like settled ink. New page rises
+   from below like a scroll unfurling upward — classical,
+   deliberate, weightless.
    ═══════════════════════ */
 
-/* Header morph transition — keeps header stable across navigations */
-::view-transition-group(header) {
-  z-index: 100;
-  animation-duration: 0.35s;
+@view-transition {
+  navigation: auto;
 }
 
-/* Main content — gentle slide + fade */
-::view-transition-group(main) {
+/*
+  Old page: stays perfectly still, just fades.
+  Like ink soaking into paper — no movement, only dissolving.
+*/
+::view-transition-old(root) {
+  animation-name: vt-ink-settle;
+  animation-duration: 0.75s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes vt-ink-settle {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  60% {
+    opacity: 0.35;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    filter: blur(1px);
+  }
+}
+
+/*
+  New page: rises from below, floating up into place.
+  The vertical ascent + fade gives the sensation of
+  a scroll being unfurled — content emerging from stillness.
+*/
+::view-transition-new(root) {
+  animation-name: vt-unfurl;
+  animation-duration: 0.9s;
+  animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@keyframes vt-unfurl {
+  0% {
+    opacity: 0;
+    transform: translateY(36px);
+  }
+  35% {
+    opacity: 0.15;
+    transform: translateY(24px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/*
+  Header fades above the unfurling — brief, unobtrusive.
+*/
+::view-transition-group(header) {
+  z-index: 100;
   animation-duration: 0.5s;
 }
 
-/* Reduce motion for view transitions */
 @media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root),
   ::view-transition-group(root) {
     animation-duration: 0s !important;
   }

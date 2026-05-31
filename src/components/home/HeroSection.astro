@@ -7,25 +7,37 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 <section
   class="hero bg-gemini-bg relative flex min-h-screen items-center justify-center overflow-hidden"
   data-section-theme="gold"
+  id="hero"
 >
-  <!-- Ambient light orbs -->
+  <!-- Ambient light orbs (with parallax layers) -->
   <div class="absolute inset-0 z-0 overflow-hidden">
     <div
-      class="animate-float-slow bg-spectrum-gold/12 absolute -top-32 left-[10%] h-[500px] w-[500px] rounded-full blur-[120px]"
+      class="hero-orb animate-float-slow bg-spectrum-gold/12 absolute -top-32 left-[10%] h-[500px] w-[500px] rounded-full blur-[120px]"
+      style="--parallax: -0.06"
     >
     </div>
     <div
-      class="animate-float-slower bg-spectrum-orange/8 absolute top-[20%] right-[5%] h-[600px] w-[600px] rounded-full blur-[140px]"
+      class="hero-orb animate-float-slower bg-spectrum-orange/8 absolute top-[20%] right-[5%] h-[600px] w-[600px] rounded-full blur-[140px]"
+      style="--parallax: -0.03"
     >
     </div>
     <div
-      class="animate-float bg-spectrum-rose/6 absolute -bottom-32 left-[30%] h-[400px] w-[400px] rounded-full blur-[100px]"
+      class="hero-orb animate-float bg-spectrum-rose/6 absolute -bottom-32 left-[30%] h-[400px] w-[400px] rounded-full blur-[100px]"
+      style="--parallax: -0.09"
     >
     </div>
     <div
-      class="animate-float-slow bg-spectrum-gold/5 absolute top-[50%] left-[60%] h-[300px] w-[300px] rounded-full blur-[80px]"
+      class="hero-orb animate-float-slow bg-spectrum-gold/5 absolute top-[50%] left-[60%] h-[300px] w-[300px] rounded-full blur-[80px]"
+      style="--parallax: -0.05"
     >
     </div>
+  </div>
+
+  <!-- Cursor glow — a large warm spotlight that follows the mouse -->
+  <div
+    class="cursor-glow pointer-events-none absolute inset-0 z-5"
+    aria-hidden="true"
+  >
   </div>
 
   <!-- Content -->
@@ -77,12 +89,9 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       </span>
     </div>
 
-    <!-- Decorative top line -->
-    <div class="scroll-reveal mb-8 flex justify-center">
-      <div
-        class="via-accent/40 h-px w-40 bg-gradient-to-r from-transparent to-transparent"
-      >
-      </div>
+    <!-- Decorative top rule — classical gold line with diamond -->
+    <div class="scroll-reveal ornamental-rule mb-8">
+      <div class="ornamental-diamond"></div>
     </div>
 
     <!-- Main Title — Luxury Art Text -->
@@ -90,12 +99,9 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       {lang === "en" ? SITE.nameEn : SITE.name}
     </h1>
 
-    <!-- Decorative bottom line -->
-    <div class="scroll-reveal mb-8 flex justify-center">
-      <div
-        class="via-accent/40 h-px w-40 bg-gradient-to-r from-transparent to-transparent"
-      >
-      </div>
+    <!-- Decorative bottom rule — mirrors the top -->
+    <div class="scroll-reveal ornamental-rule mb-8">
+      <div class="ornamental-diamond"></div>
     </div>
 
     <!-- Subtitle -->
@@ -111,7 +117,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
     >
       <a
         href={lang === "en" ? "/en/about" : "/about"}
-        class="btn-primary group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
+        class="btn-primary btn-shimmer group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
       >
         {lang === "en" ? "Learn More" : "了解更多"}
         <span
@@ -121,7 +127,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       </a>
       <a
         href={lang === "en" ? "/en/join" : "/join"}
-        class="btn-secondary inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
+        class="btn-secondary btn-shimmer inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
       >
         {lang === "en" ? "Join Us" : "加入我们"}
       </a>
@@ -382,4 +388,140 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       animation: none !important;
     }
   }
+
+  /* ═══════════════════════════════════════════
+     Ink Glow — soft, diffused bloom like ink spreading
+     on rice paper. Larger and gentler than a spotlight.
+     ═══════════════════════════════════════════ */
+
+  .cursor-glow {
+    background: radial-gradient(
+      800px circle at var(--cursor-x, 50%) var(--cursor-y, 50%),
+      rgba(200, 136, 16, 0.045) 0%,
+      rgba(200, 136, 16, 0.02) 35%,
+      rgba(224, 85, 53, 0.015) 55%,
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  .hero:hover .cursor-glow {
+    opacity: 1;
+  }
+
+  /* ═══════════════════════════════════════════
+     Classical Spark Frame — gold corner accents
+     on the hero icon container.
+     ═══════════════════════════════════════════ */
+
+  .spark-frame::before,
+  .spark-frame::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+    z-index: 5;
+  }
+
+  .spark-frame::before {
+    top: 4px;
+    left: 4px;
+    border-top: 1px solid rgba(200, 136, 16, 0.3);
+    border-left: 1px solid rgba(200, 136, 16, 0.3);
+  }
+
+  .spark-frame::after {
+    bottom: 4px;
+    right: 4px;
+    border-bottom: 1px solid rgba(200, 136, 16, 0.3);
+    border-right: 1px solid rgba(200, 136, 16, 0.3);
+  }
+
+  /* ═══════════════════════════════════════════
+     Scroll Parallax Orbs
+     Each orb translates at its own speed as you scroll.
+     ═══════════════════════════════════════════ */
+
+  .hero-orb {
+    will-change: transform;
+  }
 </style>
+
+<script>
+  let cleanupHero: (() => void) | null = null;
+
+  function setupHero() {
+    cleanupHero?.();
+
+    const hero = document.getElementById("hero");
+    if (!hero) return;
+
+    const cleanups: (() => void)[] = [];
+
+    // Cursor glow — uses latest-event pattern to avoid lag
+    const glow = hero.querySelector<HTMLElement>(".cursor-glow");
+    if (glow) {
+      let ticking = false;
+      let latest: MouseEvent | null = null;
+
+      const onMouseMove = (e: MouseEvent) => {
+        latest = e;
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            if (!latest) return;
+            const rect = hero.getBoundingClientRect();
+            glow.style.setProperty(
+              "--cursor-x",
+              `${((latest.clientX - rect.left) / rect.width) * 100}%`,
+            );
+            glow.style.setProperty(
+              "--cursor-y",
+              `${((latest.clientY - rect.top) / rect.height) * 100}%`,
+            );
+            ticking = false;
+            latest = null;
+          });
+          ticking = true;
+        }
+      };
+
+      hero.addEventListener("mousemove", onMouseMove, { passive: true });
+      cleanups.push(() => hero.removeEventListener("mousemove", onMouseMove));
+    }
+
+    // Scroll parallax orbs
+    const orbs = document.querySelectorAll<HTMLElement>(".hero-orb");
+    if (orbs.length) {
+      let scrollTicking = false;
+
+      const onScroll = () => {
+        if (!scrollTicking) {
+          requestAnimationFrame(() => {
+            const scrollY = window.scrollY;
+            orbs.forEach((orb) => {
+              const rate =
+                parseFloat(orb.style.getPropertyValue("--parallax")) || -0.05;
+              orb.style.transform = `translateY(${scrollY * rate}px)`;
+            });
+            scrollTicking = false;
+          });
+          scrollTicking = true;
+        }
+      };
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      cleanups.push(() => window.removeEventListener("scroll", onScroll));
+    }
+
+    cleanupHero = () => {
+      cleanups.forEach((fn) => fn());
+      cleanups.length = 0;
+    };
+  }
+
+  setupHero();
+  document.addEventListener("astro:after-swap", setupHero);
+  document.addEventListener("astro:before-swap", () => cleanupHero?.());
+</script>
