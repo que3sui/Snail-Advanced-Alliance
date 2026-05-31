@@ -1,0 +1,18 @@
+---
+const currentPath = Astro.url.pathname;
+const isEn = currentPath.startsWith("/en");
+// e.g. /en/events/talk-01/ → /events/talk-01/  or  /about/ → /en/about/
+const zhPath = currentPath.replace(/^\/en/, "") || "/";
+const enPath = currentPath === "/" ? "/en/" : "/en" + currentPath;
+---
+
+<span class="text-text-muted inline-flex items-center gap-1 text-sm">
+  <a
+    href={isEn ? zhPath : enPath}
+    class="hover:text-text-primary transition-colors"
+    lang={isEn ? "zh" : "en"}
+    hreflang={isEn ? "zh" : "en"}
+  >
+    {isEn ? "中文" : "EN"}
+  </a>
+</span>

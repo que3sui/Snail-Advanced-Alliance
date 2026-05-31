@@ -1,0 +1,134 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import ScrollReveal from "@/components/common/ScrollReveal.astro";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<BaseLayout
+  title={lang === "en" ? "Advancement Guide" : "进阶指南"}
+  description={lang === "en"
+    ? "The Big Data School Undergraduate Advancement Guide"
+    : "《人工智能与数据科学学院本科进阶指南》"}
+>
+  <section class="bg-primary-900 pt-32 pb-20">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6 text-center">
+      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+        {lang === "en" ? "Advancement Guide" : "进阶指南"}
+      </h1>
+      <p class="text-primary-200 mt-4 text-lg">
+        {
+          lang === "en"
+            ? "The first departmental 'survival handbook' at USTC"
+            : "科大首个院系级'生存手册'"
+        }
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "About the Guide" : "指南简介"}
+        </h2>
+        <div class="text-text-secondary space-y-4 leading-relaxed">
+          {
+            lang === "en" ? (
+              <>
+                <p>
+                  The{" "}
+                  <strong>
+                    Big Data School Undergraduate Advancement Guide
+                  </strong>{" "}
+                  is the first departmental "survival handbook" at USTC,
+                  compiled by Feng Wenjun and the Wokojinjie Alliance team.
+                </p>
+                <p>
+                  With <strong>100+ articles</strong>, it covers course
+                  selection, internships, graduate school applications, study
+                  abroad, scientific research, and career paths — everything a
+                  USTC student needs to navigate university life beyond the
+                  classroom.
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  《人工智能与数据科学学院本科进阶指南》是科大首个院系级"生存手册"，由冯文俊与蜗壳进阶联盟团队共同编写。
+                </p>
+                <p>
+                  累计 <strong>100+ 篇文章</strong>
+                  ，涵盖选课攻略、实习指南、保研/出国申请、科研入门、职业路径等内容
+                  ——课堂之外，科大学子需要的全部信息。
+                </p>
+              </>
+            )
+          }
+        </div>
+      </ScrollReveal>
+
+      <!-- CTA to GitBook -->
+      <ScrollReveal class="mt-10">
+        <a
+          href="https://advancedguideforsds.gitbook.io/advancedguide/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-primary-500 hover:bg-primary-400 inline-flex items-center gap-2 rounded-lg px-8 py-4 font-semibold text-white transition-all hover:shadow-lg"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M4 19.5A2.5 2.5 0 016.5 17H20"></path>
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"
+            ></path>
+          </svg>
+          {lang === "en" ? "Read on GitBook" : "在 GitBook 上阅读"}
+        </a>
+      </ScrollReveal>
+
+      <!-- Key Topics -->
+      <ScrollReveal class="mt-16">
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "Key Topics" : "内容板块"}
+        </h2>
+        <div class="grid gap-3 sm:grid-cols-2">
+          {
+            [
+              { zh: "选课攻略", en: "Course Selection" },
+              { zh: "实习指南", en: "Internship Guide" },
+              { zh: "保研经验", en: "Graduate Admission" },
+              { zh: "出国申请", en: "Study Abroad" },
+              { zh: "科研入门", en: "Research 101" },
+              { zh: "竞赛指导", en: "Competitions" },
+              { zh: "职业规划", en: "Career Planning" },
+              { zh: "学长学姐说", en: "Alumni Voices" },
+            ].map((topic) => (
+              <div class="flex items-center gap-3 rounded-lg border border-slate-200 bg-white p-4">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  class="text-accent-400"
+                >
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+                <span class="text-text-primary">
+                  {lang === "en" ? topic.en : topic.zh}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,92 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+
+const dialogues = await getCollection("dialogues");
+dialogues.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+---
+
+<BaseLayout
+  title={lang === "en" ? "Dialogues" : "对话"}
+  description={lang === "en"
+    ? "In-depth interviews with notable USTC alumni"
+    : "深度访谈，追溯科大杰出校友的成长轨迹"}
+>
+  <section class="bg-primary-900 pt-32 pb-20">
+    <div class="mx-auto max-w-[var(--content-max)] px-6 text-center">
+      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+        {lang === "en" ? "Dialogues" : "对话"}
+      </h1>
+      <p class="text-primary-200 mt-4 text-lg">
+        {
+          lang === "en"
+            ? "Long-form interviews tracing the growth trajectories of USTC alumni"
+            : "深度访谈专栏，追溯科大杰出校友的成长轨迹与关键抉择"
+        }
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-max)] px-6">
+      <div class="grid gap-8 md:grid-cols-2">
+        {
+          dialogues.map((dialogue) => {
+            const href =
+              lang === "en"
+                ? `/en/dialogues/${dialogue.id}`
+                : `/dialogues/${dialogue.id}`;
+            return (
+              <a
+                href={href}
+                class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              >
+                <div class="mb-4 flex items-center gap-3">
+                  <span class="rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-700">
+                    {lang === "en" ? "Dialogue" : "对话"}
+                  </span>
+                  {dialogue.data.tags?.map((tag) => (
+                    <span class="text-text-muted rounded-full bg-slate-100 px-2 py-0.5 text-xs">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 class="text-text-primary group-hover:text-primary-600 mb-2 text-xl font-bold transition-colors">
+                  {dialogue.data.title}
+                </h3>
+                <p class="text-primary-500 mb-4 text-sm">
+                  {dialogue.data.interviewee}
+                  {lang === "en" && dialogue.data.intervieweeTitleEn
+                    ? ` — ${dialogue.data.intervieweeTitleEn}`
+                    : ` — ${dialogue.data.intervieweeTitle}`}
+                </p>
+                <p class="text-text-secondary grow text-sm leading-relaxed">
+                  {lang === "en" && dialogue.data.summaryEn
+                    ? dialogue.data.summaryEn
+                    : dialogue.data.summary}
+                </p>
+                <div class="text-text-muted mt-4 flex items-center gap-4 text-xs">
+                  <span>
+                    {dialogue.data.date.toLocaleDateString(
+                      lang === "en" ? "en-US" : "zh-CN",
+                      {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      },
+                    )}
+                  </span>
+                  {dialogue.data.wordCount && (
+                    <span>{dialogue.data.wordCount.toLocaleString()} 字</span>
+                  )}
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

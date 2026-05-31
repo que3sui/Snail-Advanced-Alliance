@@ -1,0 +1,163 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import ScrollReveal from "@/components/common/ScrollReveal.astro";
+import { SITE } from "@/lib/constants";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<BaseLayout
+  title={lang === "en" ? "Join Us" : "加入我们"}
+  description={lang === "en" ? "Join Wokojinjie Alliance" : "加入蜗壳进阶联盟"}
+>
+  <section class="bg-primary-900 pt-32 pb-20">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6 text-center">
+      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+        {lang === "en" ? "Join Us" : "加入我们"}
+      </h1>
+      <p class="text-primary-200 mt-4 text-lg">
+        {
+          lang === "en"
+            ? "Become part of the community breaking information barriers"
+            : "成为打破信息壁垒的社区一员"
+        }
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "How to Join" : "加入方式"}
+        </h2>
+      </ScrollReveal>
+
+      <div class="grid gap-6 sm:grid-cols-2">
+        <!-- QQ Groups -->
+        <ScrollReveal
+          class="rounded-2xl border border-slate-200 bg-white p-6 text-center"
+        >
+          <div
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-100"
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="text-blue-500"
+            >
+              <path
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="mb-2 font-bold">QQ 群</h3>
+          <p class="text-text-muted mb-2 text-sm">
+            {lang === "en" ? "Activity Notifications" : "活动通知群"}
+          </p>
+          <p class="text-primary-500 text-2xl font-bold tracking-wide">
+            {SITE.qqGroup}
+          </p>
+          <p class="text-text-muted mt-4 text-sm">
+            {lang === "en" ? "Recruitment Group" : "招新群"}: {SITE.qqRecruit}
+          </p>
+        </ScrollReveal>
+
+        <!-- WeChat -->
+        <ScrollReveal
+          class="rounded-2xl border border-slate-200 bg-white p-6 text-center"
+        >
+          <div
+            class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-green-100"
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="text-green-500"
+            >
+              <path
+                d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348z"
+              ></path>
+            </svg>
+          </div>
+          <h3 class="mb-2 font-bold">
+            {lang === "en" ? "WeChat" : "微信公众号"}
+          </h3>
+          <p class="text-text-muted mb-2 text-sm">
+            {lang === "en" ? "Follow for updates" : "关注获取最新动态"}
+          </p>
+          <p class="text-primary-500 text-xl font-bold">{SITE.wechat}</p>
+          <p class="text-text-muted mt-4 text-xs">
+            {lang === "en" ? "Scan QR code below" : "扫描下方二维码关注"}
+          </p>
+        </ScrollReveal>
+      </div>
+
+      <!-- What we look for -->
+      <ScrollReveal class="mt-16">
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "Who We're Looking For" : "我们期待的你"}
+        </h2>
+        <div class="rounded-2xl border border-slate-200 bg-white p-8">
+          <ul class="text-text-secondary space-y-4">
+            {
+              lang === "en" ? (
+                <>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent-400 mt-1 font-bold">01</span>
+                    <span>
+                      <strong>USTC student</strong> — undergraduate or
+                      postgraduate, any department
+                    </span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent-400 mt-1 font-bold">02</span>
+                    <span>
+                      <strong>Passionate about sharing</strong> — believe in
+                      breaking information barriers and helping peers grow
+                    </span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent-400 mt-1 font-bold">03</span>
+                    <span>
+                      <strong>Willing to contribute</strong> — content creation,
+                      event organization, external relations, design, or
+                      operations — any skill is valued
+                    </span>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent-400 mt-1 font-bold">01</span>
+                    <span>
+                      <strong>科大学子</strong> — 本科生或研究生，不限院系
+                    </span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent-400 mt-1 font-bold">02</span>
+                    <span>
+                      <strong>乐于分享</strong> —
+                      认同打破信息壁垒的理念，愿意帮助同伴成长
+                    </span>
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <span class="text-accent-400 mt-1 font-bold">03</span>
+                    <span>
+                      <strong>愿意贡献</strong> — 内容创作 / 活动组织 / 对外联络
+                      / 设计 / 运营，任一技能都能发光
+                    </span>
+                  </li>
+                </>
+              )
+            }
+          </ul>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</BaseLayout>

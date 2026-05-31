@@ -1,0 +1,119 @@
+---
+import { SITE } from "@/lib/constants";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<section
+  class="bg-primary-900 relative flex min-h-screen items-center justify-center overflow-hidden"
+>
+  <!-- Background image layer (activate by adding /hero-bg.webp to public/) -->
+  <div
+    class="absolute inset-0 bg-[url('/hero-bg.webp')] bg-cover bg-center opacity-30"
+  >
+  </div>
+
+  <!-- Gradient overlay -->
+  <div
+    class="from-primary-900 via-primary-800/95 to-primary-950 absolute inset-0 bg-gradient-to-br"
+  >
+  </div>
+
+  <!-- Animated decorative orbs -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div
+      class="animate-float-slow bg-primary-400/20 absolute -top-32 left-[10%] h-72 w-72 rounded-full blur-[80px]"
+    >
+    </div>
+    <div
+      class="animate-float-slower bg-accent-400/15 absolute right-[5%] bottom-[20%] h-96 w-96 rounded-full blur-[100px]"
+    >
+    </div>
+    <div
+      class="animate-float bg-primary-300/10 absolute top-[20%] right-[30%] h-48 w-48 rounded-full blur-[60px]"
+    >
+    </div>
+  </div>
+
+  <!-- Subtle grid pattern -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.04]"
+    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><rect width=%2240%22 height=%2240%22 fill=%22none%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>')"
+  >
+  </div>
+
+  <div
+    class="relative z-10 mx-auto max-w-[var(--content-max)] px-6 py-32 text-center"
+  >
+    <!-- Badge -->
+    <div
+      class="scroll-reveal border-primary-400/30 bg-primary-800/50 text-primary-200 mb-8 inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm backdrop-blur-sm"
+    >
+      <span
+        class="bg-accent-400 inline-block h-2 w-2 animate-pulse rounded-full"
+      >
+      </span>
+      <span>{lang === "en" ? SITE.affiliationEn : SITE.affiliation}</span>
+    </div>
+
+    <!-- Main title -->
+    <h1
+      class="scroll-reveal mb-6 text-4xl leading-tight font-extrabold tracking-tight text-white md:text-6xl lg:text-7xl"
+    >
+      <span
+        class="to-primary-200 bg-gradient-to-r from-white bg-clip-text text-transparent"
+      >
+        {lang === "en" ? SITE.nameEn : SITE.name}
+      </span>
+    </h1>
+
+    <!-- Subtitle -->
+    <p
+      class="scroll-reveal text-primary-200/90 mx-auto mb-12 max-w-2xl text-lg leading-relaxed md:text-xl"
+    >
+      {lang === "en" ? SITE.descriptionEn : SITE.description}
+    </p>
+
+    <!-- CTAs -->
+    <div
+      class="scroll-reveal flex flex-col items-center justify-center gap-4 sm:flex-row"
+    >
+      <a
+        href={lang === "en" ? "/en/about" : "/about"}
+        class="group bg-accent-400 text-primary-900 hover:bg-accent-300 hover:shadow-accent-400/25 inline-flex items-center gap-2 rounded-xl px-8 py-3.5 font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg"
+      >
+        {lang === "en" ? "Learn More" : "了解更多"}
+        <span class="transition-transform group-hover:translate-x-0.5"
+          >&rarr;</span
+        >
+      </a>
+      <a
+        href={lang === "en" ? "/en/join" : "/join"}
+        class="inline-flex items-center gap-2 rounded-xl border border-white/20 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10"
+      >
+        {lang === "en" ? "Join Us" : "加入我们"}
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+    <a
+      href="#content-start"
+      class="text-primary-200/60 hover:text-primary-200 flex flex-col items-center gap-2 transition-colors"
+    >
+      <span class="text-xs tracking-widest uppercase">
+        {lang === "en" ? "Scroll" : "向下滚动"}
+      </span>
+      <svg
+        class="h-5 w-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"></path></svg
+      >
+    </a>
+  </div>
+</section>

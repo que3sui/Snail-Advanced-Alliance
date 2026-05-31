@@ -1,0 +1,112 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const events = await getCollection("events");
+  return events.map((event) => ({ params: { slug: event.id } }));
+}
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+
+const { slug } = Astro.params;
+const events = await getCollection("events");
+const event = events.find((e) => e.id === slug);
+
+if (!event) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(event);
+---
+
+<BaseLayout
+  title={event.data.title}
+  description={lang === "en" && event.data.summaryEn
+    ? event.data.summaryEn
+    : event.data.summary}
+>
+  <article class="pt-32 pb-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <!-- Header -->
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3">
+          <span
+            class="bg-primary-100 text-primary-700 rounded-full px-2.5 py-0.5 text-xs font-medium"
+          >
+            {
+              event.data.type === "talk"
+                ? lang === "en"
+                  ? "Alumni Talk"
+                  : "蜗壳有约"
+                : event.data.type
+            }
+          </span>
+          <span class="text-text-muted text-sm">
+            {
+              event.data.date.toLocaleDateString(
+                lang === "en" ? "en-US" : "zh-CN",
+                {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                },
+              )
+            }
+          </span>
+          {
+            event.data.venue && (
+              <span class="text-text-muted text-sm">@{event.data.venue}</span>
+            )
+          }
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight md:text-4xl">
+          {event.data.title}
+        </h1>
+        {
+          event.data.guest && (
+            <p class="text-primary-600 mt-3 text-lg">
+              {event.data.guest}
+              {lang === "en" && event.data.guestTitleEn
+                ? ` — ${event.data.guestTitleEn}`
+                : ""}
+              {lang !== "en" && event.data.guestTitle
+                ? ` — ${event.data.guestTitle}`
+                : ""}
+            </p>
+          )
+        }
+      </div>
+
+      <!-- Content -->
+      <div class="prose prose-slate max-w-none">
+        <Content />
+      </div>
+
+      <!-- Links -->
+      {
+        event.data.links && event.data.links.length > 0 && (
+          <div class="bg-surface-alt mt-12 rounded-2xl border border-slate-200 p-6">
+            <h3 class="mb-3 text-lg font-bold">
+              {lang === "en" ? "Related Links" : "相关链接"}
+            </h3>
+            <ul class="space-y-2">
+              {event.data.links.map((link) => (
+                <li>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-primary-500 hover:underline"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>

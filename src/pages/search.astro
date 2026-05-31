@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<BaseLayout
+  title={lang === "en" ? "Search" : "搜索"}
+  description={lang === "en"
+    ? "Search content across the site"
+    : "搜索全站内容"}
+>
+  <section class="bg-primary-900 pt-32 pb-20">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6 text-center">
+      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+        {lang === "en" ? "Search" : "搜索"}
+      </h1>
+    </div>
+  </section>
+
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-2xl px-6">
+      <div id="search" class="pagefind-ui"></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
+<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    new window.PagefindUI({
+      element: "#search",
+      showSubResults: true,
+      showImages: false,
+    });
+  });
+</script>

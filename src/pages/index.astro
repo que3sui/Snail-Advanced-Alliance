@@ -1,0 +1,27 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import HeroSection from "@/components/home/HeroSection.astro";
+import MetricsCounter from "@/components/home/MetricsCounter.astro";
+import ActivityCards from "@/components/home/ActivityCards.astro";
+import NewsSection from "@/components/home/NewsSection.astro";
+import PartnerLogos from "@/components/home/PartnerLogos.astro";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<BaseLayout
+  title={lang === "en" ? "Home" : "首页"}
+  description={lang === "en"
+    ? "Wokojinjie Alliance — A student-led volunteer organization at USTC breaking information barriers."
+    : "蜗壳进阶联盟 — 中国科学技术大学学生组织，打破信息壁垒，构建全周期成长支持体系。"}
+>
+  <HeroSection />
+
+  <MetricsCounter />
+
+  <ActivityCards />
+
+  <NewsSection />
+
+  <PartnerLogos />
+</BaseLayout>

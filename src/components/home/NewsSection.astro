@@ -1,0 +1,206 @@
+---
+import { getCollection } from "astro:content";
+import ScrollReveal from "@/components/common/ScrollReveal.astro";
+import SectionHeading from "@/components/common/SectionHeading.astro";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+
+const featuredEvents = await getCollection(
+  "events",
+  ({ data }) => data.featured,
+);
+const featuredDialogues = await getCollection(
+  "dialogues",
+  ({ data }) => data.featured,
+);
+
+const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime(),
+);
+---
+
+<section class="bg-surface-alt py-[var(--section-gap)]" id="content-start">
+  <div class="mx-auto max-w-5xl px-6">
+    <SectionHeading
+      title={lang === "en" ? "Latest Updates" : "最新动态"}
+      subtitle={lang === "en"
+        ? "Events, dialogues, and featured content"
+        : "活动回顾 · 对话精选 · 内容推荐"}
+    />
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {
+        allFeatured.slice(0, 4).map((item, i) => {
+          const isDialogue = "interviewee" in item.data;
+          const href = isDialogue
+            ? lang === "en"
+              ? `/en/dialogues/${item.id}`
+              : `/dialogues/${item.id}`
+            : lang === "en"
+              ? `/en/events/${item.id}`
+              : `/events/${item.id}`;
+          const title = item.data.title;
+          const summary = isDialogue
+            ? lang === "en" && item.data.summaryEn
+              ? item.data.summaryEn
+              : item.data.summary
+            : lang === "en" && item.data.summaryEn
+              ? item.data.summaryEn
+              : item.data.summary;
+          const date = item.data.date.toLocaleDateString(
+            lang === "en" ? "en-US" : "zh-CN",
+            {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            },
+          );
+          const typeLabel = isDialogue
+            ? lang === "en"
+              ? "Dialogue"
+              : "深度对话"
+            : lang === "en"
+              ? "Event"
+              : "活动";
+
+          // Color theme per card
+          const themes = [
+            {
+              badge: "bg-primary-100 text-primary-700",
+              accent: "border-l-primary-500",
+            },
+            {
+              badge: "bg-purple-100 text-purple-700",
+              accent: "border-l-purple-500",
+            },
+            {
+              badge: "bg-accent-100 text-accent-600",
+              accent: "border-l-accent-400",
+            },
+            {
+              badge: "bg-emerald-100 text-emerald-700",
+              accent: "border-l-emerald-500",
+            },
+          ];
+          const theme = themes[i % themes.length];
+
+          return (
+            <ScrollReveal>
+              <a
+                href={href}
+                class={`group block rounded-2xl border border-l-4 border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${theme.accent}`}
+              >
+                <div class="mb-4 flex items-center gap-3">
+                  <span
+                    class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${theme.badge}`}
+                  >
+                    {typeLabel}
+                  </span>
+                  <span class="text-text-muted flex items-center gap-1 text-xs">
+                    <svg
+                      class="h-3 w-3"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <>
+                        <rect
+                          x="3"
+                          y="4"
+                          width="18"
+                          height="18"
+                          rx="2"
+                          ry="2"
+                        />
+                        <line x1="16" y1="2" x2="16" y2="6" />
+                        <line x1="8" y1="2" x2="8" y2="6" />
+                        <line x1="3" y1="10" x2="21" y2="10" />
+                      </>
+                    </svg>
+                    {date}
+                  </span>
+                </div>
+                <h3 class="text-text-primary group-hover:text-primary-600 mb-2 text-lg font-bold transition-colors">
+                  {title}
+                </h3>
+                <p class="text-text-secondary line-clamp-2 text-sm leading-relaxed">
+                  {summary}
+                </p>
+                <div class="text-text-muted mt-4 flex items-center gap-4 text-xs">
+                  {!isDialogue && "guest" in item.data && item.data.guest && (
+                    <span class="flex items-center gap-1">
+                      <svg
+                        class="h-3 w-3"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      {item.data.guest}
+                    </span>
+                  )}
+                  {!isDialogue && "venue" in item.data && item.data.venue && (
+                    <span class="flex items-center gap-1">
+                      <svg
+                        class="h-3 w-3"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      {item.data.venue}
+                    </span>
+                  )}
+                  {isDialogue && "interviewee" in item.data && (
+                    <span class="flex items-center gap-1">
+                      <svg
+                        class="h-3 w-3"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                      </svg>
+                      {item.data.interviewee}
+                    </span>
+                  )}
+                </div>
+              </a>
+            </ScrollReveal>
+          );
+        })
+      }
+    </div>
+
+    {
+      allFeatured.length > 4 && (
+        <div class="mt-10 text-center">
+          <a
+            href={lang === "en" ? "/en/events" : "/events"}
+            class="text-text-secondary hover:border-primary-300 hover:text-primary-600 inline-flex items-center gap-2 rounded-lg border border-slate-300 px-6 py-2.5 text-sm font-medium transition-all"
+          >
+            {lang === "en" ? "View All" : "查看全部"}
+            <span>&rarr;</span>
+          </a>
+        </div>
+      )
+    }
+  </div>
+</section>

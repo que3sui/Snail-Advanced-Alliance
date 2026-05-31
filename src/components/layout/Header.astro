@@ -1,0 +1,143 @@
+---
+import { NAV_ITEMS, SITE } from "@/lib/constants";
+import LanguageSwitch from "@/components/common/LanguageSwitch.astro";
+
+const currentPath = Astro.url.pathname;
+const lang = currentPath.startsWith("/en") ? "en" : "zh";
+---
+
+<header class="header" id="header">
+  <nav
+    class="mx-auto flex max-w-[var(--content-max)] items-center justify-between px-6 py-4"
+  >
+    <a
+      href={lang === "en" ? "/en" : "/"}
+      class="flex items-center gap-3 text-xl font-bold no-underline"
+    >
+      <span
+        class="bg-primary-500 inline-block h-10 w-10 rounded-lg text-center text-lg leading-10 text-white"
+      >
+        进
+      </span>
+      <span class="text-text-primary hidden sm:inline">
+        {lang === "en" ? SITE.nameEn : SITE.name}
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden items-center gap-1 md:flex">
+      {
+        NAV_ITEMS.map((item) => {
+          const href = lang === "en" ? `/en${item.href}` : item.href;
+          const isActive =
+            currentPath === href ||
+            (item.href !== "/about" && currentPath.startsWith(item.href));
+          return (
+            <li>
+              <a
+                href={href}
+                class={`rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                  isActive
+                    ? "bg-primary-500/10 text-primary-500"
+                    : "text-text-secondary hover:bg-surface-alt hover:text-text-primary"
+                }`}
+              >
+                {lang === "en" ? item.en : item.zh}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+
+    <div class="flex items-center gap-3">
+      <LanguageSwitch lang={lang} currentPath={currentPath} />
+
+      <!-- CTA -->
+      <a
+        href={lang === "en" ? "/en/join" : "/join"}
+        class="bg-primary-500 hover:bg-primary-400 hidden rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors sm:inline-block"
+      >
+        {lang === "en" ? "Join Us" : "加入我们"}
+      </a>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-btn"
+        class="text-text-secondary hover:bg-surface-alt inline-flex items-center justify-center rounded-lg p-2 md:hidden"
+        aria-label={lang === "en" ? "Toggle menu" : "切换菜单"}
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden border-t border-slate-200 md:hidden">
+    <ul class="flex flex-col gap-1 px-6 py-4">
+      {
+        NAV_ITEMS.map((item) => {
+          const href = lang === "en" ? `/en${item.href}` : item.href;
+          return (
+            <li>
+              <a
+                href={href}
+                class="text-text-secondary hover:bg-surface-alt hover:text-text-primary block rounded-lg px-3 py-2.5 text-sm font-medium"
+              >
+                {lang === "en" ? item.en : item.zh}
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</header>
+
+<script>
+  const header = document.getElementById("header")!;
+  const menuBtn = document.getElementById("mobile-menu-btn")!;
+  const mobileMenu = document.getElementById("mobile-menu")!;
+
+  // Scroll effect
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 10);
+  });
+
+  // Mobile menu toggle
+  menuBtn.addEventListener("click", () => {
+    const open = !mobileMenu.classList.toggle("hidden");
+    menuBtn.setAttribute("aria-expanded", String(open));
+  });
+</script>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    transition:
+      background-color 0.3s,
+      box-shadow 0.3s;
+    background-color: transparent;
+  }
+
+  .header.scrolled {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+</style>

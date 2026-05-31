@@ -1,0 +1,180 @@
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+/* Design System: Theme Tokens */
+@theme {
+  /* Primary: Deep Tech Blue */
+  --color-primary-950: #060f1e;
+  --color-primary-900: #0a1628;
+  --color-primary-800: #0f1f3d;
+  --color-primary-700: #15294a;
+  --color-primary-600: #1a3560;
+  --color-primary-500: #1e3d6e;
+  --color-primary-400: #2a5a9e;
+  --color-primary-300: #3a6fb5;
+  --color-primary-200: #6b9fd4;
+  --color-primary-100: #a3c7e8;
+
+  /* Accent: Warm Gold */
+  --color-accent-600: #8b6914;
+  --color-accent-500: #b8932d;
+  --color-accent-400: #d4a853;
+  --color-accent-300: #e0c278;
+  --color-accent-200: #ebd59f;
+  --color-accent-100: #f5e8c7;
+
+  /* Surfaces */
+  --color-surface: #f8fafc;
+  --color-surface-alt: #f1f5f9;
+  --color-surface-dark: #0f172a;
+
+  /* Text */
+  --color-text-primary: #1e293b;
+  --color-text-secondary: #64748b;
+  --color-text-muted: #5e7088;
+  --color-text-inverse: #f1f5f9;
+
+  /* Typography */
+  --font-sans:
+    "Alibaba PuHuiTi", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+    sans-serif;
+  --font-display: "站酷高端黑", "Noto Serif SC", "STSong", serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+  --font-en-sans: "Inter", "Source Sans Pro", "Helvetica Neue", sans-serif;
+  --font-en-display: "Playfair Display", "Cormorant Garamond", serif;
+
+  /* Spacing scale */
+  --section-gap: 5rem;
+  --section-gap-sm: 3rem;
+  --content-max: 1200px;
+  --content-narrow: 800px;
+}
+
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text-primary);
+    background-color: var(--color-surface);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :lang(zh) {
+    font-size: 0.9375rem;
+  }
+
+  :lang(en) {
+    --font-sans: var(--font-en-sans);
+    --font-display: var(--font-en-display);
+    font-size: 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+  }
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  h3 {
+    font-size: clamp(1.25rem, 2vw, 1.75rem);
+  }
+
+  ::selection {
+    background-color: var(--color-primary-300);
+    color: white;
+  }
+}
+
+/* Scroll reveal utilities */
+@utility scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Floating animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+  }
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-15px) scale(1.03);
+  }
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-10px) scale(1.02);
+  }
+}
+
+@utility animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+@utility animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+@utility animate-float-slower {
+  animation: float-slower 10s ease-in-out infinite;
+}
+
+/* Motion respect */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus visible ring for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-primary-300);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

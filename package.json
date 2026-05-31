@@ -1,0 +1,31 @@
+{
+  "name": "alliance_web",
+  "version": "1.0.0",
+  "description": "蜗壳进阶联盟官方网站",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && npx pagefind --site dist/client --output-subdir pagefind",
+    "preview": "astro preview",
+    "format": "prettier --write ."
+  },
+  "keywords": [],
+  "author": "蜗壳进阶联盟",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/cloudflare": "^13.6.0",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.3",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.4.2",
+    "pagefind": "^1.5.2",
+    "tailwindcss": "^4.3.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.8.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "prettier-plugin-tailwindcss": "^0.8.0",
+    "typescript": "^6.0.3"
+  }
+}

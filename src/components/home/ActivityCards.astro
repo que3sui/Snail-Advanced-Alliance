@@ -1,0 +1,96 @@
+---
+import ScrollReveal from "@/components/common/ScrollReveal.astro";
+import SectionHeading from "@/components/common/SectionHeading.astro";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+
+const activities = [
+  {
+    icon: "M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122",
+    title: lang === "en" ? "Alumni Talks" : "蜗壳有约",
+    subtitle: lang === "en" ? "Alumni Return Series" : "校友返校沙龙系列",
+    desc:
+      lang === "en"
+        ? "USTC's first alumni return salon series. Distinguished alumni from academia and industry share their journeys and insights."
+        : "USTC 首个校友返校沙龙系列，邀请学术界与工业界杰出校友分享成长轨迹与行业洞见。",
+    href: lang === "en" ? "/en/events/talks" : "/events/talks",
+  },
+  {
+    icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    title: lang === "en" ? "Advancement Camp" : "蜗壳进阶营",
+    subtitle:
+      lang === "en" ? "Research & Career Series" : "科研访谈 + 生涯规划",
+    desc:
+      lang === "en"
+        ? "In-depth conversations with young AI scholars and systematic career planning courses in three tracks."
+        : "AI 青年学者深度访谈 + 科研启动/职业导航/学术规划三轨生涯课程体系。",
+    href: lang === "en" ? "/en/events/camp" : "/events/camp",
+  },
+  {
+    icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z",
+    title: lang === "en" ? "Dialogues" : "对话",
+    subtitle: lang === "en" ? "In-depth Interviews" : "深度访谈专栏",
+    desc:
+      lang === "en"
+        ? "Long-form interviews with notable USTC alumni, tracing their growth trajectories and pivotal decisions. Published across major platforms."
+        : "长文深度访谈，追溯科大杰出校友的成长轨迹与关键抉择，多平台转载发布。",
+    href: lang === "en" ? "/en/dialogues" : "/dialogues",
+  },
+  {
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    title: lang === "en" ? "Hackathons" : "徽客松 / 智造营",
+    subtitle: lang === "en" ? "AI Hackathons" : "AI 黑客松",
+    desc:
+      lang === "en"
+        ? "Hefei's first AI hackathon. 48-hour creation camps co-organized with Alibaba ModelScope, Datawhale, and ZhenFund."
+        : "合肥首个 AI 黑客松，联合阿里魔搭、Datawhale、真格基金举办的 48 小时创意冲刺赛。",
+    href: lang === "en" ? "/en/events" : "/events",
+  },
+];
+---
+
+<section class="py-[var(--section-gap)]">
+  <div class="mx-auto max-w-[var(--content-max)] px-6">
+    <SectionHeading
+      title={lang === "en" ? "Our Activities" : "品牌活动"}
+      subtitle={lang === "en"
+        ? "Four pillars empowering USTC students"
+        : "四大品牌活动，赋能科大学子进阶成长"}
+    />
+
+    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {
+        activities.map((item, i) => (
+          <ScrollReveal class="group">
+            <a
+              href={item.href}
+              class="hover:border-primary-200 block h-full rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            >
+              <div class="bg-primary-500/10 text-primary-500 group-hover:bg-primary-500 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-colors group-hover:text-white">
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                >
+                  <path d={item.icon} />
+                </svg>
+              </div>
+              <h3 class="text-text-primary mb-1 text-lg font-bold">
+                {item.title}
+              </h3>
+              <p class="text-primary-500 mb-2 text-xs font-medium">
+                {item.subtitle}
+              </p>
+              <p class="text-text-secondary text-sm leading-relaxed">
+                {item.desc}
+              </p>
+            </a>
+          </ScrollReveal>
+        ))
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,183 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import ScrollReveal from "@/components/common/ScrollReveal.astro";
+import { SITE } from "@/lib/constants";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<BaseLayout
+  title={lang === "en" ? "About" : "关于我们"}
+  description={lang === "en" ? "About Wokojinjie Alliance" : "关于蜗壳进阶联盟"}
+>
+  <!-- Page Header -->
+  <section class="bg-primary-900 pt-32 pb-20">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6 text-center">
+      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+        {lang === "en" ? "About Us" : "关于我们"}
+      </h1>
+      <p class="text-primary-200 mt-4 text-lg">
+        {
+          lang === "en"
+            ? "Breaking information barriers, building growth support"
+            : "打破信息壁垒，构建成长支持体系"
+        }
+      </p>
+    </div>
+  </section>
+
+  <!-- Mission -->
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "Our Mission" : "我们的使命"}
+        </h2>
+        <div class="text-text-secondary space-y-4 leading-relaxed">
+          {
+            lang === "en" ? (
+              <>
+                <p>
+                  Wokojinjie Alliance is a youth volunteer organization
+                  spontaneously founded by students of the University of Science
+                  and Technology of China (USTC), affiliated with the Youth
+                  League Committee of USTC's School of Artificial Intelligence
+                  and Data Science (SAIDS).
+                </p>
+                <p>
+                  We identified a critical gap in higher education: while USTC
+                  students work extremely hard, their potential is often
+                  unfulfilled due to limited horizons and information asymmetry.
+                  The "missing half" of university education — career planning,
+                  professional development, and academic growth — is something
+                  nobody systematically teaches.
+                </p>
+                <p>
+                  Our mission is to build a{" "}
+                  <strong>full-journey growth support system</strong> from
+                  enrollment to graduation, empowering USTC students in career
+                  planning and academic development.
+                </p>
+              </>
+            ) : (
+              <>
+                <p>
+                  蜗壳进阶联盟是由中国科学技术大学学生自发创办的青年志愿者组织，挂靠中国科学技术大学人工智能与数据科学学院团委。
+                </p>
+                <p>
+                  我们发现大学教育中存在着巨大的"信息差"——科大的同学们非常努力，但受限于视野和信息壁垒，许多潜能未能被充分激发。大学教育中"缺失的另一半"——职业规划、专业发展、学术成长——没有人系统性地教授。
+                </p>
+                <p>
+                  我们的使命是构建从入学到毕业的
+                  <strong>"全周期成长支持体系"</strong>
+                  ，帮助科大学子实现从"直觉依赖型思维"到"目标导向型思维"的转变。
+                </p>
+              </>
+            )
+          }
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Founder Section -->
+  <section class="bg-surface-alt py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "Founder" : "创始人"}
+        </h2>
+        <div class="rounded-2xl border border-slate-200 bg-white p-8">
+          <div class="flex flex-col gap-6 md:flex-row md:items-start">
+            <div
+              class="bg-primary-500 flex h-20 w-20 shrink-0 items-center justify-center rounded-full text-2xl font-bold text-white"
+            >
+              冯
+            </div>
+            <div>
+              <h3 class="text-text-primary text-xl font-bold">
+                {SITE.founder}
+              </h3>
+              <p class="text-text-secondary mt-1 text-sm">
+                {
+                  lang === "en"
+                    ? "2020 B.S. in Data Science → 2024 M.S. at USTC SAIDS"
+                    : "2020 级大数据本科 → 2024 级硕士（保研）"
+                }
+              </p>
+              <p class="text-text-secondary mt-4 leading-relaxed">
+                {
+                  lang === "en"
+                    ? "Former Student Union Executive Chair of SAIDS. Interned at Microsoft Research Asia (MSRA) earning the 'Stars of Tomorrow' award. Champion of multiple AI competitions including the Spark Cup Large Model Challenge. Author of the 100+ article 'Big Data School Undergraduate Advancement Guide' — the first departmental 'survival handbook' at USTC."
+                    : `曾任人工智能与数据科学学院第二届学生会执行主席。曾在微软亚洲研究院（MSRA）实习并获得“明日之星”优秀实习生称号。获得“星火杯”大模型应用创新挑战赛团队冠军、讯飞 AI 开发者大赛全国十强等多项竞赛荣誉。《大数据学院本科进阶指南》作者，累计编写 100+ 篇文章，是科大首个院系级‘生存手册’。`
+                }
+              </p>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Affiliation -->
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">
+          {lang === "en" ? "Affiliation" : "挂靠关系"}
+        </h2>
+        <div class="rounded-2xl border border-slate-200 bg-white p-8">
+          <p class="text-text-secondary leading-relaxed">
+            {
+              lang === "en"
+                ? `Officially affiliated with the Youth League Committee of USTC's School of Artificial Intelligence and Data Science (SAIDS). All major events are co-hosted with SAIDS.`
+                : `蜗壳进阶联盟正式挂靠中国科学技术大学人工智能与数据科学学院团委。大型活动均由学院团委主办、蜗壳进阶联盟承办。`
+            }
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="bg-surface-alt py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-8 text-2xl font-bold">
+          {lang === "en" ? "Milestones" : "重要里程碑"}
+        </h2>
+        <div class="space-y-8">
+          {
+            [
+              {
+                year: "2024",
+                zh: "《大数据学院本科进阶指南》持续编写，累计超 100 篇文章；蜗壳进阶联盟正式成立，挂靠 SAIDS 团委；举办首期蜗壳有约、首期蜗壳进阶营访谈、TRAE Vibe Coding 工坊。",
+                en: "The Advancement Guide surpassed 100 articles. Alliance formally established under SAIDS Youth League. First Alumni Talk, first Advancement Camp interview, and TRAE Vibe Coding Workshop held.",
+              },
+              {
+                year: "2025",
+                zh: "举办 6 期蜗壳有约、蜗壳进阶营系列访谈、AI/CS 生涯规划系列课；陆奇博士（奇绩创坛创始人）前沿趋势分享会；Momenta 智能驾驶校园行；《对话·李博杰》21,000 字访谈被腾讯新闻等多家媒体转载。",
+                en: "6 Alumni Talks, Advancement Camp interview series, AI/CS Career Planning Courses. Qi Lu keynote. Momenta Campus Tour. The 21,000-word Li Bojie interview was republished by major outlets.",
+              },
+              {
+                year: "2026",
+                zh: "举办合肥首个 AI 黑客松「徽客松」（联合魔搭/Datawhale）、「蜗壳智造营」48 小时 AI 黑客松（联合魔搭/Datawhale/真格基金）；OpenClaw 龙虾工作坊等。一年累计：30+ 活动、40+ 嘉宾、20 万字内容、10 万+ 触达。",
+                en: "Hefei's first AI hackathon 'Hui Hackathon'. 48-hour 'Woke Creation Camp' with ModelScope/Datawhale/ZhenFund. OpenClaw workshop. One-year total: 30+ events, 40+ guests, 200k+ words, 100k+ reach.",
+              },
+            ].map((item) => (
+              <div class="border-primary-200 relative border-l-2 pb-2 pl-8">
+                <div class="bg-primary-500 absolute top-1 left-[-9px] h-4 w-4 rounded-full" />
+                <span class="text-primary-500 text-sm font-bold">
+                  {item.year}
+                </span>
+                <p class="text-text-secondary mt-2 leading-relaxed">
+                  {lang === "en" ? item.en : item.zh}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</BaseLayout>

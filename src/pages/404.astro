@@ -1,0 +1,29 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+
+const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
+---
+
+<BaseLayout title={lang === "en" ? "Page Not Found" : "页面未找到"}>
+  <section class="bg-surface flex min-h-screen items-center justify-center">
+    <div class="text-center">
+      <p class="text-primary-200 text-8xl font-extrabold">404</p>
+      <h1 class="text-text-primary mt-4 text-2xl font-bold">
+        {lang === "en" ? "Page Not Found" : "页面未找到"}
+      </h1>
+      <p class="text-text-secondary mt-2">
+        {
+          lang === "en"
+            ? "The page you are looking for does not exist."
+            : "您访问的页面不存在。"
+        }
+      </p>
+      <a
+        href={lang === "en" ? "/en" : "/"}
+        class="bg-primary-500 hover:bg-primary-400 mt-6 inline-block rounded-lg px-6 py-3 font-medium text-white transition-colors"
+      >
+        {lang === "en" ? "Back to Home" : "返回首页"}
+      </a>
+    </div>
+  </section>
+</BaseLayout>

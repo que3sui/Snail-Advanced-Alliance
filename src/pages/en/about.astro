@@ -1,0 +1,78 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import ScrollReveal from "@/components/common/ScrollReveal.astro";
+import { SITE } from "@/lib/constants";
+---
+
+<BaseLayout title="About" description="About Wokojinjie Alliance">
+  <section class="bg-primary-900 pt-32 pb-20">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6 text-center">
+      <h1 class="text-4xl font-extrabold text-white md:text-5xl">About Us</h1>
+      <p class="text-primary-200 mt-4 text-lg">
+        Breaking information barriers, building growth support
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">Our Mission</h2>
+        <div class="text-text-secondary space-y-4 leading-relaxed">
+          <p>
+            Wokojinjie Alliance is a youth volunteer organization spontaneously
+            founded by students of the University of Science and Technology of
+            China (USTC), affiliated with the Youth League Committee of USTC's
+            School of Artificial Intelligence and Data Science (SAIDS).
+          </p>
+          <p>
+            We identified a critical gap in higher education: while USTC
+            students work extremely hard, their potential is often unfulfilled
+            due to limited horizons and information asymmetry. The "missing
+            half" of university education — career planning, professional
+            development, and academic growth — is something nobody
+            systematically teaches.
+          </p>
+          <p>
+            Our mission is to build a <strong
+              >full-journey growth support system</strong
+            > from enrollment to graduation, empowering USTC students in career planning
+            and academic development.
+          </p>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+
+  <section class="bg-surface-alt py-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <ScrollReveal>
+        <h2 class="mb-6 text-2xl font-bold">Founder</h2>
+        <div class="rounded-2xl border border-slate-200 bg-white p-8">
+          <div class="flex flex-col gap-6 md:flex-row md:items-start">
+            <div
+              class="bg-primary-500 flex h-20 w-20 shrink-0 items-center justify-center rounded-full text-2xl font-bold text-white"
+            >
+              冯
+            </div>
+            <div>
+              <h3 class="text-text-primary text-xl font-bold">
+                {SITE.founderEn}
+              </h3>
+              <p class="text-text-secondary mt-1 text-sm">
+                2020 B.S. in Data Science → 2024 M.S. at USTC SAIDS
+              </p>
+              <p class="text-text-secondary mt-4 leading-relaxed">
+                Former Student Union Executive Chair of SAIDS. Interned at
+                Microsoft Research Asia (MSRA) earning the "Stars of Tomorrow"
+                award. Champion of multiple AI competitions. Author of the 100+
+                article "Big Data School Undergraduate Advancement Guide" — the
+                first departmental "survival handbook" at USTC.
+              </p>
+            </div>
+          </div>
+        </div>
+      </ScrollReveal>
+    </div>
+  </section>
+</BaseLayout>

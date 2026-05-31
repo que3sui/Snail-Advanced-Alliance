@@ -1,0 +1,66 @@
+---
+import BaseLayout from "@/components/layout/BaseLayout.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const events = await getCollection("events");
+  return events.map((event) => ({ params: { slug: event.id } }));
+}
+
+const { slug } = Astro.params;
+const events = await getCollection("events");
+const event = events.find((e) => e.id === slug);
+
+if (!event) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(event);
+---
+
+<BaseLayout
+  title={event.data.titleEn || event.data.title}
+  description={event.data.summaryEn || event.data.summary}
+>
+  <article class="pt-32 pb-[var(--section-gap)]">
+    <div class="mx-auto max-w-[var(--content-narrow)] px-6">
+      <div class="mb-8">
+        <div class="mb-4 flex items-center gap-3">
+          <span
+            class="bg-primary-100 text-primary-700 rounded-full px-2.5 py-0.5 text-xs font-medium"
+          >
+            {event.data.type === "talk" ? "Alumni Talk" : event.data.type}
+          </span>
+          <span class="text-text-muted text-sm">
+            {
+              event.data.date.toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
+          </span>
+          {
+            event.data.venue && (
+              <span class="text-text-muted text-sm">@{event.data.venue}</span>
+            )
+          }
+        </div>
+        <h1 class="text-3xl font-extrabold tracking-tight md:text-4xl">
+          {event.data.titleEn || event.data.title}
+        </h1>
+        {
+          event.data.guest && event.data.guestTitleEn && (
+            <p class="text-primary-600 mt-3 text-lg">
+              {event.data.guest} — {event.data.guestTitleEn}
+            </p>
+          )
+        }
+      </div>
+
+      <div class="prose prose-slate max-w-none">
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
