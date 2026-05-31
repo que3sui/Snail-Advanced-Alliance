@@ -95,7 +95,7 @@ const titleChars = [...title];
     <div class="scroll-reveal ornamental-rule mb-8"></div>
 
     <!-- Main Title — Luxury Art Text -->
-    <h1 class="scroll-reveal luxury-title mb-6">
+    <h1 class="scroll-reveal luxury-title mb-6" aria-label={title}>
       {
         titleChars.map((char, i) => (
           <span class="title-char" style={`animation-delay: ${i * 0.12}s`}>
@@ -396,9 +396,9 @@ const titleChars = [...title];
 
     const cleanups: (() => void)[] = [];
 
-    // Cursor glow — uses latest-event pattern to avoid lag
-    const glow = hero.querySelector<HTMLElement>(".spotlight");
-    if (glow) {
+    // Spotlight cursor tracking — uses latest-event pattern to avoid lag
+    const spotlight = hero.querySelector<HTMLElement>(".spotlight");
+    if (spotlight) {
       let ticking = false;
       let latest: MouseEvent | null = null;
 
@@ -408,11 +408,11 @@ const titleChars = [...title];
           requestAnimationFrame(() => {
             if (!latest) return;
             const rect = hero.getBoundingClientRect();
-            glow.style.setProperty(
+            spotlight.style.setProperty(
               "--cursor-x",
               `${((latest.clientX - rect.left) / rect.width) * 100}%`,
             );
-            glow.style.setProperty(
+            spotlight.style.setProperty(
               "--cursor-y",
               `${((latest.clientY - rect.top) / rect.height) * 100}%`,
             );
