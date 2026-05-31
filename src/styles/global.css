@@ -98,6 +98,11 @@
     background-color: var(--color-gemini-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: filter 0.8s ease;
+  }
+
+  body.scrolling {
+    filter: brightness(0.97);
   }
 
   /* Cinematic vignette + warm color shift overlay */

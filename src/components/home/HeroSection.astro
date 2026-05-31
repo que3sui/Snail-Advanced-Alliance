@@ -121,7 +121,7 @@ const titleChars = [...title];
     >
       <a
         href={lang === "en" ? "/en/about" : "/about"}
-        class="btn-primary btn-shimmer group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
+        class="btn-primary btn-shimmer btn-halo group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
       >
         {lang === "en" ? "Learn More" : "了解更多"}
         <span
@@ -131,7 +131,7 @@ const titleChars = [...title];
       </a>
       <a
         href={lang === "en" ? "/en/join" : "/join"}
-        class="btn-secondary btn-shimmer inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
+        class="btn-secondary btn-shimmer btn-halo inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
       >
         {lang === "en" ? "Join Us" : "加入我们"}
       </a>
@@ -416,6 +416,10 @@ const titleChars = [...title];
               "--cursor-y",
               `${((latest.clientY - rect.top) / rect.height) * 100}%`,
             );
+            // Warmer, larger glow over interactive elements
+            const target = latest.target as HTMLElement;
+            const isInteractive = target?.closest("a, button, [data-tilt]");
+            spotlight.style.opacity = isInteractive ? "1" : "0.6";
             ticking = false;
             latest = null;
           });
@@ -460,4 +464,18 @@ const titleChars = [...title];
   setupHero();
   document.addEventListener("astro:after-swap", setupHero);
   document.addEventListener("astro:before-swap", () => cleanupHero?.());
+
+  // Scroll-focus: subtle dim while scrolling, sharpen on stop
+  let scrollTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener(
+    "scroll",
+    () => {
+      document.body.classList.add("scrolling");
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => {
+        document.body.classList.remove("scrolling");
+      }, 150);
+    },
+    { passive: true },
+  );
 </script>
