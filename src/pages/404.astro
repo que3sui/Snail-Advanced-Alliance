@@ -5,9 +5,9 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 ---
 
 <BaseLayout title={lang === "en" ? "Page Not Found" : "页面未找到"}>
-  <section class="bg-surface flex min-h-screen items-center justify-center">
+  <section class="bg-gemini-bg flex min-h-screen items-center justify-center">
     <div class="text-center">
-      <p class="text-primary-200 text-8xl font-extrabold">404</p>
+      <p class="text-text-muted text-8xl font-extrabold">404</p>
       <h1 class="text-text-primary mt-4 text-2xl font-bold">
         {lang === "en" ? "Page Not Found" : "页面未找到"}
       </h1>
@@ -20,7 +20,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       </p>
       <a
         href={lang === "en" ? "/en" : "/"}
-        class="bg-primary-500 hover:bg-primary-400 mt-6 inline-block rounded-lg px-6 py-3 font-medium text-white transition-colors"
+        class="border-accent/25 bg-accent/5 text-accent hover:border-accent/50 hover:bg-accent/12 mt-6 inline-block rounded-full border px-6 py-3 font-medium transition-all duration-700 hover:shadow-[0_0_32px_rgba(200,136,16,0.08)]"
       >
         {lang === "en" ? "Back to Home" : "返回首页"}
       </a>

@@ -14,12 +14,12 @@ dialogues.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     ? "In-depth interviews with notable USTC alumni"
     : "深度访谈，追溯科大杰出校友的成长轨迹"}
 >
-  <section class="bg-primary-900 pt-32 pb-20">
+  <section class="bg-gemini-surface pt-32 pb-16">
     <div class="mx-auto max-w-[var(--content-max)] px-6 text-center">
-      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+      <h1 class="text-text-primary text-4xl font-bold md:text-5xl">
         {lang === "en" ? "Dialogues" : "对话"}
       </h1>
-      <p class="text-primary-200 mt-4 text-lg">
+      <p class="text-text-secondary mt-4 text-lg">
         {
           lang === "en"
             ? "Long-form interviews tracing the growth trajectories of USTC alumni"
@@ -31,7 +31,7 @@ dialogues.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
   <section class="py-[var(--section-gap)]">
     <div class="mx-auto max-w-[var(--content-max)] px-6">
-      <div class="grid gap-8 md:grid-cols-2">
+      <div class="grid gap-6 md:grid-cols-2">
         {
           dialogues.map((dialogue) => {
             const href =
@@ -41,22 +41,22 @@ dialogues.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
             return (
               <a
                 href={href}
-                class="group flex flex-col rounded-2xl border border-slate-200 bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                class="glass glass-hover group flex flex-col rounded-2xl p-8"
               >
                 <div class="mb-4 flex items-center gap-3">
-                  <span class="rounded-full bg-purple-100 px-2.5 py-0.5 text-xs font-medium text-purple-700">
+                  <span class="bg-spectrum-purple/15 text-spectrum-purple rounded-full px-2.5 py-0.5 text-xs font-medium">
                     {lang === "en" ? "Dialogue" : "对话"}
                   </span>
                   {dialogue.data.tags?.map((tag) => (
-                    <span class="text-text-muted rounded-full bg-slate-100 px-2 py-0.5 text-xs">
+                    <span class="text-text-muted bg-gemini-hover/50 rounded-full px-2 py-0.5 text-xs">
                       {tag}
                     </span>
                   ))}
                 </div>
-                <h3 class="text-text-primary group-hover:text-primary-600 mb-2 text-xl font-bold transition-colors">
+                <h3 class="text-text-primary group-hover:text-accent mb-2 text-xl font-semibold transition-colors">
                   {dialogue.data.title}
                 </h3>
-                <p class="text-primary-500 mb-4 text-sm">
+                <p class="text-accent mb-4 text-sm">
                   {dialogue.data.interviewee}
                   {lang === "en" && dialogue.data.intervieweeTitleEn
                     ? ` — ${dialogue.data.intervieweeTitleEn}`
@@ -71,11 +71,7 @@ dialogues.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
                   <span>
                     {dialogue.data.date.toLocaleDateString(
                       lang === "en" ? "en-US" : "zh-CN",
-                      {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      },
+                      { year: "numeric", month: "long", day: "numeric" },
                     )}
                   </span>
                   {dialogue.data.wordCount && (

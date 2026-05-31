@@ -5,71 +5,102 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 ---
 
 <section
-  class="bg-primary-900 relative flex min-h-screen items-center justify-center overflow-hidden"
+  class="hero bg-gemini-bg relative flex min-h-screen items-center justify-center overflow-hidden"
+  data-section-theme="gold"
 >
-  <!-- Background image layer (activate by adding /hero-bg.webp to public/) -->
-  <div
-    class="absolute inset-0 bg-[url('/hero-bg.webp')] bg-cover bg-center opacity-30"
-  >
-  </div>
-
-  <!-- Gradient overlay -->
-  <div
-    class="from-primary-900 via-primary-800/95 to-primary-950 absolute inset-0 bg-gradient-to-br"
-  >
-  </div>
-
-  <!-- Animated decorative orbs -->
-  <div class="absolute inset-0 overflow-hidden">
+  <!-- Ambient light orbs -->
+  <div class="absolute inset-0 z-0 overflow-hidden">
     <div
-      class="animate-float-slow bg-primary-400/20 absolute -top-32 left-[10%] h-72 w-72 rounded-full blur-[80px]"
+      class="animate-float-slow bg-spectrum-gold/12 absolute -top-32 left-[10%] h-[500px] w-[500px] rounded-full blur-[120px]"
     >
     </div>
     <div
-      class="animate-float-slower bg-accent-400/15 absolute right-[5%] bottom-[20%] h-96 w-96 rounded-full blur-[100px]"
+      class="animate-float-slower bg-spectrum-orange/8 absolute top-[20%] right-[5%] h-[600px] w-[600px] rounded-full blur-[140px]"
     >
     </div>
     <div
-      class="animate-float bg-primary-300/10 absolute top-[20%] right-[30%] h-48 w-48 rounded-full blur-[60px]"
+      class="animate-float bg-spectrum-rose/6 absolute -bottom-32 left-[30%] h-[400px] w-[400px] rounded-full blur-[100px]"
+    >
+    </div>
+    <div
+      class="animate-float-slow bg-spectrum-gold/5 absolute top-[50%] left-[60%] h-[300px] w-[300px] rounded-full blur-[80px]"
     >
     </div>
   </div>
 
-  <!-- Subtle grid pattern -->
+  <!-- Content -->
   <div
-    class="pointer-events-none absolute inset-0 opacity-[0.04]"
-    style="background-image: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22><rect width=%2240%22 height=%2240%22 fill=%22none%22 stroke=%22white%22 stroke-width=%220.5%22/></svg>')"
+    class="hero-content relative z-10 mx-auto max-w-4xl px-6 py-32 text-center"
   >
-  </div>
+    <!-- Spark Brand Icon -->
+    <div class="scroll-reveal mb-12 flex justify-center">
+      <div
+        class="spark-frame animate-pulse-glow relative flex h-24 w-24 items-center justify-center rounded-full"
+      >
+        <svg
+          width="52"
+          height="52"
+          viewBox="0 0 64 64"
+          fill="none"
+          class="spark-icon relative z-10"
+        >
+          <path
+            d="M32 4L35 21L39 13L37 26L44 19L38 29L50 26L40 33L48 38L36 35L42 46L32 38L25 47L28 36L20 42L26 31L18 33L27 27L20 21L30 26L26 15L32 24L34 7L32 4Z"
+            fill="url(#hero-spark)"
+          >
+          </path>
+          <defs>
+            <linearGradient
+              id="hero-spark"
+              x1="8"
+              y1="8"
+              x2="56"
+              y2="56"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-color="#C88810"></stop>
+              <stop offset="0.4" stop-color="#F0D060"></stop>
+              <stop offset="1" stop-color="#D43D52"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+    </div>
 
-  <div
-    class="relative z-10 mx-auto max-w-[var(--content-max)] px-6 py-32 text-center"
-  >
     <!-- Badge -->
     <div
-      class="scroll-reveal border-primary-400/30 bg-primary-800/50 text-primary-200 mb-8 inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm backdrop-blur-sm"
+      class="scroll-reveal border-accent/20 bg-accent/5 mb-10 inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm backdrop-blur-sm"
     >
-      <span
-        class="bg-accent-400 inline-block h-2 w-2 animate-pulse rounded-full"
-      >
+      <span class="bg-accent h-1.5 w-1.5 animate-pulse rounded-full"></span>
+      <span class="text-accent font-medium tracking-wide">
+        {lang === "en" ? "A USTC Student Organization" : "USTC 青年学生组织"}
       </span>
-      <span>{lang === "en" ? SITE.affiliationEn : SITE.affiliation}</span>
     </div>
 
-    <!-- Main title -->
-    <h1
-      class="scroll-reveal mb-6 text-4xl leading-tight font-extrabold tracking-tight text-white md:text-6xl lg:text-7xl"
-    >
-      <span
-        class="to-primary-200 bg-gradient-to-r from-white bg-clip-text text-transparent"
+    <!-- Decorative top line -->
+    <div class="scroll-reveal mb-8 flex justify-center">
+      <div
+        class="via-accent/40 h-px w-40 bg-gradient-to-r from-transparent to-transparent"
       >
-        {lang === "en" ? SITE.nameEn : SITE.name}
-      </span>
+      </div>
+    </div>
+
+    <!-- Main Title — Luxury Art Text -->
+    <h1 class="scroll-reveal luxury-title mb-6">
+      {lang === "en" ? SITE.nameEn : SITE.name}
     </h1>
+
+    <!-- Decorative bottom line -->
+    <div class="scroll-reveal mb-8 flex justify-center">
+      <div
+        class="via-accent/40 h-px w-40 bg-gradient-to-r from-transparent to-transparent"
+      >
+      </div>
+    </div>
 
     <!-- Subtitle -->
     <p
-      class="scroll-reveal text-primary-200/90 mx-auto mb-12 max-w-2xl text-lg leading-relaxed md:text-xl"
+      class="scroll-reveal text-text-secondary mx-auto mb-14 max-w-xl text-lg leading-relaxed tracking-wide md:text-xl"
     >
       {lang === "en" ? SITE.descriptionEn : SITE.description}
     </p>
@@ -80,40 +111,275 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
     >
       <a
         href={lang === "en" ? "/en/about" : "/about"}
-        class="group bg-accent-400 text-primary-900 hover:bg-accent-300 hover:shadow-accent-400/25 inline-flex items-center gap-2 rounded-xl px-8 py-3.5 font-semibold transition-all hover:-translate-y-0.5 hover:shadow-lg"
+        class="btn-primary group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
       >
         {lang === "en" ? "Learn More" : "了解更多"}
-        <span class="transition-transform group-hover:translate-x-0.5"
+        <span
+          class="arrow inline-block transition-all duration-700 ease-[cubic-bezier(0.22,0.61,0.36,1)] group-hover:translate-x-1"
           >&rarr;</span
         >
       </a>
       <a
         href={lang === "en" ? "/en/join" : "/join"}
-        class="inline-flex items-center gap-2 rounded-xl border border-white/20 px-8 py-3.5 font-semibold text-white backdrop-blur-sm transition-all hover:-translate-y-0.5 hover:border-white/40 hover:bg-white/10"
+        class="btn-secondary inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
       >
         {lang === "en" ? "Join Us" : "加入我们"}
       </a>
     </div>
   </div>
 
+  <!-- Sparkle particles (CSS-only) -->
+  <div
+    class="sparkles pointer-events-none absolute inset-0 z-10 overflow-hidden"
+    aria-hidden="true"
+  >
+    <span class="sparkle" style="top:18%;left:18%;animation-delay:0s"></span>
+    <span class="sparkle" style="top:25%;right:15%;animation-delay:0.8s"></span>
+    <span class="sparkle" style="top:40%;left:12%;animation-delay:1.6s"></span>
+    <span class="sparkle" style="top:55%;right:20%;animation-delay:0.4s"></span>
+    <span class="sparkle" style="top:70%;left:22%;animation-delay:1.2s"></span>
+    <span class="sparkle" style="top:30%;left:80%;animation-delay:0.6s"></span>
+    <span class="sparkle" style="top:65%;right:10%;animation-delay:1.8s"></span>
+    <span class="sparkle" style="top:15%;left:45%;animation-delay:2.0s"></span>
+    <span class="sparkle" style="top:80%;left:55%;animation-delay:1.0s"></span>
+    <span class="sparkle" style="top:50%;right:8%;animation-delay:0.2s"></span>
+  </div>
+
   <!-- Scroll indicator -->
-  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+  <div class="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
     <a
       href="#content-start"
-      class="text-primary-200/60 hover:text-primary-200 flex flex-col items-center gap-2 transition-colors"
+      class="text-text-muted hover:text-accent flex flex-col items-center gap-2 transition-colors duration-500"
     >
-      <span class="text-xs tracking-widest uppercase">
+      <span class="text-[10px] tracking-[0.25em] uppercase">
         {lang === "en" ? "Scroll" : "向下滚动"}
       </span>
       <svg
-        class="h-5 w-5"
+        class="scroll-arrow h-4 w-4"
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
         stroke-width="2"
         stroke-linecap="round"
-        stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"></path></svg
+        stroke-linejoin="round"
       >
+        <path d="M12 5v14M19 12l-7 7-7-7"></path>
+      </svg>
     </a>
   </div>
 </section>
+
+<style>
+  /* ═══════════════════════════════════════════
+     Luxury Art-Text Title
+     ═══════════════════════════════════════════ */
+
+  .luxury-title {
+    font-family: var(--font-display);
+    font-size: clamp(2.8rem, 7vw, 6.5rem);
+    font-weight: 900;
+    line-height: 1.08;
+    letter-spacing: 0.03em;
+
+    /* Metallic gradient: gold → bright gold → rose → copper */
+    background: linear-gradient(
+      135deg,
+      #c88810 0%,
+      #f0d060 20%,
+      #e8a820 35%,
+      #d43d52 55%,
+      #e05535 70%,
+      #c88810 85%,
+      #f0d060 100%
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    animation: luxury-shimmer 5s ease-in-out infinite;
+
+    /* Stacked filter for micro depth */
+    filter: drop-shadow(0 2px 4px rgba(200, 136, 16, 0.2));
+  }
+
+  /* Shimmer sweep — a bright highlight travels across the metallic text */
+  @keyframes luxury-shimmer {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Spark Icon Container
+     ═══════════════════════════════════════════ */
+
+  .spark-frame {
+    background: radial-gradient(
+      circle at center,
+      rgba(200, 136, 16, 0.12) 0%,
+      transparent 70%
+    );
+  }
+
+  .spark-icon {
+    animation: spark-rotate 20s linear infinite;
+    transform-origin: center;
+  }
+
+  @keyframes spark-rotate {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     CTA Buttons — silky, barely-there feel
+     ═══════════════════════════════════════════ */
+
+  .btn-primary {
+    position: relative;
+    color: var(--color-accent);
+    background: rgba(200, 136, 16, 0.06);
+    border: 1px solid rgba(200, 136, 16, 0.18);
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .btn-primary:hover {
+    background: rgba(200, 136, 16, 0.12);
+    border-color: rgba(200, 136, 16, 0.35);
+    box-shadow:
+      0 0 32px rgba(200, 136, 16, 0.08),
+      inset 0 0 0 1px rgba(200, 136, 16, 0.04);
+  }
+
+  .btn-primary .arrow {
+    opacity: 0.6;
+  }
+
+  .btn-primary:hover .arrow {
+    opacity: 1;
+  }
+
+  .btn-secondary {
+    color: var(--color-text-primary);
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.85);
+    border-color: rgba(200, 136, 16, 0.15);
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.03);
+  }
+
+  @keyframes btn-shimmer {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Sparkle Particles
+     ═══════════════════════════════════════════ */
+
+  .sparkle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #c88810;
+    transform: rotate(45deg) scale(0);
+    opacity: 0;
+    animation: sparkle-pop 3s ease-in-out infinite;
+    border-radius: 1px;
+    box-shadow:
+      0 0 6px rgba(200, 136, 16, 0.6),
+      0 0 12px rgba(200, 136, 16, 0.3);
+  }
+
+  @keyframes sparkle-pop {
+    0%,
+    100% {
+      transform: rotate(45deg) scale(0);
+      opacity: 0;
+    }
+    15% {
+      transform: rotate(45deg) scale(1.2);
+      opacity: 1;
+    }
+    30% {
+      transform: rotate(45deg) scale(1);
+      opacity: 0.8;
+    }
+    50% {
+      transform: rotate(45deg) scale(0.3);
+      opacity: 0.2;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Scroll Arrow
+     ═══════════════════════════════════════════ */
+
+  .scroll-arrow {
+    animation: scroll-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Hero Depth Exit — content recedes as user scrolls past.
+     CSS-only, progressive enhancement.
+     ═══════════════════════════════════════════ */
+
+  @supports (animation-timeline: view()) {
+    .hero-content {
+      animation: hero-exit linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 100%;
+      transform-origin: center top;
+    }
+  }
+
+  @keyframes hero-exit {
+    to {
+      scale: 0.96;
+      opacity: 0.15;
+      filter: blur(2px);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     Motion Respect
+     ═══════════════════════════════════════════ */
+
+  @media (prefers-reduced-motion: reduce) {
+    .luxury-title,
+    .btn-primary,
+    .spark-icon,
+    .sparkle,
+    .scroll-arrow,
+    .hero-content {
+      animation: none !important;
+    }
+  }
+</style>

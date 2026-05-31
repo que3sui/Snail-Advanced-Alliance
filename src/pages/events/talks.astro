@@ -17,12 +17,12 @@ events.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
     ? "USTC Alumni Return Salon Series"
     : "USTC 校友返校沙龙系列"}
 >
-  <section class="bg-primary-900 pt-32 pb-20">
+  <section class="bg-gemini-surface pt-32 pb-16">
     <div class="mx-auto max-w-[var(--content-max)] px-6 text-center">
-      <h1 class="text-4xl font-extrabold text-white md:text-5xl">
+      <h1 class="text-text-primary text-4xl font-bold md:text-5xl">
         {lang === "en" ? "Alumni Talks" : "蜗壳有约"}
       </h1>
-      <p class="text-primary-200 mt-4 text-lg">
+      <p class="text-text-secondary mt-4 text-lg">
         {
           lang === "en"
             ? "USTC's first alumni return salon series"
@@ -42,9 +42,9 @@ events.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
             return (
               <a
                 href={href}
-                class="group flex gap-6 rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                class="glass glass-hover group flex gap-6 rounded-2xl p-6"
               >
-                <div class="bg-primary-500/10 text-primary-500 flex h-16 w-16 shrink-0 items-center justify-center rounded-xl">
+                <div class="bg-spectrum-blue/15 text-spectrum-blue flex h-16 w-16 shrink-0 items-center justify-center rounded-xl">
                   <span class="text-lg font-bold">
                     #{event.id.split("-")[1]}
                   </span>
@@ -60,11 +60,11 @@ events.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
                       },
                     )}
                   </span>
-                  <h3 class="text-text-primary group-hover:text-primary-600 mt-1 text-lg font-bold transition-colors">
+                  <h3 class="text-text-primary group-hover:text-accent mt-1 text-lg font-bold transition-colors">
                     {event.data.title}
                   </h3>
                   {event.data.guest && (
-                    <p class="text-primary-500 mt-1 text-sm">
+                    <p class="text-accent mt-1 text-sm">
                       {event.data.guest} · {event.data.guestTitle}
                     </p>
                   )}

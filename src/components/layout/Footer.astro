@@ -4,29 +4,43 @@ import { FOOTER_LINKS, SITE } from "@/lib/constants";
 const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 ---
 
-<footer class="bg-primary-900 text-text-inverse">
+<footer class="border-border-subtle bg-gemini-surface border-t">
   <div class="mx-auto max-w-[var(--content-max)] px-6 py-16">
     <div class="grid gap-12 md:grid-cols-4">
       <!-- Brand -->
       <div class="md:col-span-1">
         <a
           href={lang === "en" ? "/en" : "/"}
-          class="mb-4 inline-block text-xl font-bold no-underline"
+          class="mb-4 inline-flex items-center gap-2 text-lg font-semibold no-underline"
         >
-          <span
-            class="bg-primary-500 inline-block h-10 w-10 rounded-lg text-center text-lg leading-10 text-white"
-          >
-            进
-          </span>
-          <span class="ml-3">
+          <svg width="26" height="26" viewBox="0 0 32 32" fill="none">
+            <path
+              d="M16 2L18.5 11.5L22 6L21 14.5L27 11L22.5 17L30 16.5L23 19.5L29 23L22 22L26 28L19.5 23L20 30.5L16.5 24L14 31L14.5 23L10 30L13 22.5L7 28L12.5 21L5 23.5L13 19L6 16L14.5 17.5L9 13L16.5 16L13 9.5L18 14L16 2Z"
+              fill="url(#footer-spark)"></path>
+            <defs>
+              <linearGradient
+                id="footer-spark"
+                x1="4"
+                y1="4"
+                x2="30"
+                y2="30"
+                gradientUnits="userSpaceOnUse"
+              >
+                <stop stop-color="#1A5FFF"></stop>
+                <stop offset="0.5" stop-color="#5B4BEA"></stop>
+                <stop offset="1" stop-color="#00BFA5"></stop>
+              </linearGradient>
+            </defs>
+          </svg>
+          <span class="text-text-primary">
             {lang === "en" ? SITE.nameEn : SITE.name}
           </span>
         </a>
-        <p class="text-text-muted mt-4 text-sm">
+        <p class="text-text-muted mt-4 text-sm leading-relaxed">
           {lang === "en" ? SITE.descriptionEn : SITE.description}
         </p>
         <p class="text-text-muted mt-2 text-xs">
-          {lang === "en" ? SITE.affiliationEn : SITE.affiliation}
+          {lang === "en" ? "Based at USTC, Hefei" : "坐标 · 中国科学技术大学"}
         </p>
       </div>
 
@@ -34,15 +48,15 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       {
         FOOTER_LINKS.map((group) => (
           <div>
-            <h4 class="text-primary-200 mb-4 text-sm font-semibold tracking-wider uppercase">
+            <h4 class="text-accent mb-4 text-sm font-semibold tracking-wider uppercase">
               {lang === "en" ? group.groupEn : group.group}
             </h4>
-            <ul class="space-y-2">
+            <ul class="space-y-2.5">
               {group.items.map((item) => (
                 <li>
                   <a
                     href={item.href}
-                    class="text-text-muted text-sm transition-colors hover:text-white"
+                    class="text-text-muted hover:text-text-primary text-sm transition-colors"
                     target={item.href.startsWith("http") ? "_blank" : undefined}
                     rel={
                       item.href.startsWith("http")
@@ -61,7 +75,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
     </div>
 
     <!-- Bottom bar -->
-    <div class="border-primary-700 mt-12 border-t pt-8">
+    <div class="border-border-subtle mt-12 border-t pt-8">
       <div
         class="text-text-muted flex flex-col items-center justify-between gap-4 text-xs md:flex-row"
       >
@@ -69,14 +83,14 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
           &copy; {new Date().getFullYear()}
           {lang === "en" ? SITE.nameEn : SITE.name}. All rights reserved.
         </p>
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-5">
           <span>QQ 群: {SITE.qqGroup}</span>
           <span>公众号: {SITE.wechat}</span>
           <a
             href="https://beian.miit.gov.cn/"
             target="_blank"
             rel="noopener noreferrer"
-            class="transition-colors hover:text-white"
+            class="hover:text-text-primary transition-colors"
           >
             皖ICP备XXXXXXXX号
           </a>

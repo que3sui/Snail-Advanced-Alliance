@@ -7,6 +7,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 const activities = [
   {
     icon: "M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122",
+    gradient: "from-spectrum-blue to-spectrum-purple",
     title: lang === "en" ? "Alumni Talks" : "蜗壳有约",
     subtitle: lang === "en" ? "Alumni Return Series" : "校友返校沙龙系列",
     desc:
@@ -17,6 +18,7 @@ const activities = [
   },
   {
     icon: "M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253",
+    gradient: "from-spectrum-purple to-spectrum-pink",
     title: lang === "en" ? "Advancement Camp" : "蜗壳进阶营",
     subtitle:
       lang === "en" ? "Research & Career Series" : "科研访谈 + 生涯规划",
@@ -28,6 +30,7 @@ const activities = [
   },
   {
     icon: "M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z",
+    gradient: "from-spectrum-teal to-spectrum-blue",
     title: lang === "en" ? "Dialogues" : "对话",
     subtitle: lang === "en" ? "In-depth Interviews" : "深度访谈专栏",
     desc:
@@ -38,6 +41,7 @@ const activities = [
   },
   {
     icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    gradient: "from-spectrum-pink to-spectrum-teal",
     title: lang === "en" ? "Hackathons" : "徽客松 / 智造营",
     subtitle: lang === "en" ? "AI Hackathons" : "AI 黑客松",
     desc:
@@ -58,30 +62,32 @@ const activities = [
         : "四大品牌活动，赋能科大学子进阶成长"}
     />
 
-    <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+    <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
       {
-        activities.map((item, i) => (
+        activities.map((item) => (
           <ScrollReveal class="group">
             <a
               href={item.href}
-              class="hover:border-primary-200 block h-full rounded-2xl border border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+              class="glass glass-hover block h-full rounded-2xl p-6"
             >
-              <div class="bg-primary-500/10 text-primary-500 group-hover:bg-primary-500 mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl transition-colors group-hover:text-white">
+              <div
+                class={`mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${item.gradient}`}
+              >
                 <svg
-                  width="24"
-                  height="24"
+                  width="22"
+                  height="22"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="currentColor"
+                  stroke="white"
                   stroke-width="1.5"
                 >
                   <path d={item.icon} />
                 </svg>
               </div>
-              <h3 class="text-text-primary mb-1 text-lg font-bold">
+              <h3 class="text-text-primary mb-1 text-lg font-semibold">
                 {item.title}
               </h3>
-              <p class="text-primary-500 mb-2 text-xs font-medium">
+              <p class="text-accent mb-2 text-xs font-medium">
                 {item.subtitle}
               </p>
               <p class="text-text-secondary text-sm leading-relaxed">

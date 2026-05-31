@@ -5,13 +5,13 @@ import ScrollReveal from "@/components/common/ScrollReveal.astro";
 const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 ---
 
-<section class="bg-primary-900 py-16 sm:py-20">
+<section class="bg-gemini-surface py-20">
   <div class="mx-auto max-w-[var(--content-max)] px-6">
     <div class="grid grid-cols-2 gap-8 md:grid-cols-4">
       {
         METRICS.map((metric) => (
           <ScrollReveal class="text-center">
-            <div class="text-accent-400 text-4xl font-extrabold tracking-tight md:text-5xl">
+            <div class="text-gradient text-4xl font-extrabold tracking-tight md:text-5xl">
               <span
                 class="counter"
                 data-target={metric.value}
@@ -21,7 +21,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
               </span>
               {metric.suffix}
             </div>
-            <p class="text-primary-200 mt-2 text-sm">
+            <p class="text-text-secondary mt-2 text-sm">
               {lang === "en" ? metric.labelEn : metric.label}
             </p>
           </ScrollReveal>

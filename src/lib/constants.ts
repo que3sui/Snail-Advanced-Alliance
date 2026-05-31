@@ -1,6 +1,6 @@
 export const SITE = {
   name: "蜗壳进阶联盟",
-  nameEn: "Wokojinjie Alliance",
+  nameEn: "Woko Advanced Alliance",
   description:
     "中国科学技术大学学生自发创办的青年志愿者组织，致力于打破信息壁垒，构建从入学到毕业的全周期成长支持体系。",
   descriptionEn:

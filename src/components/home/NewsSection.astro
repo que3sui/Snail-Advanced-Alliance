@@ -17,9 +17,23 @@ const featuredDialogues = await getCollection(
 const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime(),
 );
+
+const borderColors = [
+  "border-l-spectrum-blue",
+  "border-l-spectrum-purple",
+  "border-l-spectrum-teal",
+  "border-l-spectrum-pink",
+];
+
+const badgeStyles = [
+  "bg-spectrum-blue/15 text-spectrum-blue",
+  "bg-spectrum-purple/15 text-spectrum-purple",
+  "bg-spectrum-teal/15 text-spectrum-teal",
+  "bg-spectrum-pink/15 text-spectrum-pink",
+];
 ---
 
-<section class="bg-surface-alt py-[var(--section-gap)]" id="content-start">
+<section class="bg-gemini-surface py-[var(--section-gap)]" id="content-start">
   <div class="mx-auto max-w-5xl px-6">
     <SectionHeading
       title={lang === "en" ? "Latest Updates" : "最新动态"}
@@ -28,7 +42,7 @@ const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
         : "活动回顾 · 对话精选 · 内容推荐"}
     />
 
-    <div class="grid gap-6 md:grid-cols-2">
+    <div class="grid gap-5 md:grid-cols-2">
       {
         allFeatured.slice(0, 4).map((item, i) => {
           const isDialogue = "interviewee" in item.data;
@@ -49,11 +63,7 @@ const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
               : item.data.summary;
           const date = item.data.date.toLocaleDateString(
             lang === "en" ? "en-US" : "zh-CN",
-            {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            },
+            { year: "numeric", month: "long", day: "numeric" },
           );
           const typeLabel = isDialogue
             ? lang === "en"
@@ -63,36 +73,18 @@ const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
               ? "Event"
               : "活动";
 
-          // Color theme per card
-          const themes = [
-            {
-              badge: "bg-primary-100 text-primary-700",
-              accent: "border-l-primary-500",
-            },
-            {
-              badge: "bg-purple-100 text-purple-700",
-              accent: "border-l-purple-500",
-            },
-            {
-              badge: "bg-accent-100 text-accent-600",
-              accent: "border-l-accent-400",
-            },
-            {
-              badge: "bg-emerald-100 text-emerald-700",
-              accent: "border-l-emerald-500",
-            },
-          ];
-          const theme = themes[i % themes.length];
+          const border = borderColors[i % borderColors.length];
+          const badge = badgeStyles[i % badgeStyles.length];
 
           return (
             <ScrollReveal>
               <a
                 href={href}
-                class={`group block rounded-2xl border border-l-4 border-slate-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${theme.accent}`}
+                class={`glass glass-hover group block rounded-2xl border-l-4 ${border} p-6`}
               >
                 <div class="mb-4 flex items-center gap-3">
                   <span
-                    class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${theme.badge}`}
+                    class={`rounded-full px-2.5 py-0.5 text-xs font-semibold ${badge}`}
                   >
                     {typeLabel}
                   </span>
@@ -123,7 +115,7 @@ const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
                     {date}
                   </span>
                 </div>
-                <h3 class="text-text-primary group-hover:text-primary-600 mb-2 text-lg font-bold transition-colors">
+                <h3 class="text-text-primary group-hover:text-accent mb-2 text-lg font-semibold transition-colors">
                   {title}
                 </h3>
                 <p class="text-text-secondary line-clamp-2 text-sm leading-relaxed">
@@ -194,7 +186,7 @@ const allFeatured = [...featuredEvents, ...featuredDialogues].sort(
         <div class="mt-10 text-center">
           <a
             href={lang === "en" ? "/en/events" : "/events"}
-            class="text-text-secondary hover:border-primary-300 hover:text-primary-600 inline-flex items-center gap-2 rounded-lg border border-slate-300 px-6 py-2.5 text-sm font-medium transition-all"
+            class="glass text-text-secondary hover:text-text-primary hover:border-gemini-border inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium transition-all duration-300"
           >
             {lang === "en" ? "View All" : "查看全部"}
             <span>&rarr;</span>

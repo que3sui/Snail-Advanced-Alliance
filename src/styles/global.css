@@ -2,69 +2,127 @@
 
 @plugin "@tailwindcss/typography";
 
-/* Design System: Theme Tokens */
+/* ═══════════════════════════════════════════
+   Warm Light — Design Tokens
+   ═══════════════════════════════════════════ */
+
 @theme {
-  /* Primary: Deep Tech Blue */
-  --color-primary-950: #060f1e;
-  --color-primary-900: #0a1628;
-  --color-primary-800: #0f1f3d;
-  --color-primary-700: #15294a;
-  --color-primary-600: #1a3560;
-  --color-primary-500: #1e3d6e;
-  --color-primary-400: #2a5a9e;
-  --color-primary-300: #3a6fb5;
-  --color-primary-200: #6b9fd4;
-  --color-primary-100: #a3c7e8;
+  /* Background hierarchy (bottom → top) */
+  --color-gemini-bg: #fffbf5;
+  --color-gemini-surface: #f5ede0;
+  --color-gemini-card: #ffffff;
+  --color-gemini-hover: #f0e6d5;
 
-  /* Accent: Warm Gold */
-  --color-accent-600: #8b6914;
-  --color-accent-500: #b8932d;
-  --color-accent-400: #d4a853;
-  --color-accent-300: #e0c278;
-  --color-accent-200: #ebd59f;
-  --color-accent-100: #f5e8c7;
+  /* Spectrum gradient stops (warm) */
+  --color-spectrum-gold: #c88810;
+  --color-spectrum-orange: #e05535;
+  --color-spectrum-rose: #d43d52;
+  --color-spectrum-plum: #9b3a6e;
 
-  /* Surfaces */
-  --color-surface: #f8fafc;
-  --color-surface-alt: #f1f5f9;
-  --color-surface-dark: #0f172a;
+  /* Legacy spectrum aliases */
+  --color-spectrum-blue: var(--color-spectrum-gold);
+  --color-spectrum-purple: var(--color-spectrum-orange);
+  --color-spectrum-teal: var(--color-spectrum-rose);
+  --color-spectrum-pink: var(--color-spectrum-plum);
+
+  /* Accent */
+  --color-accent: #c88810;
+  --color-accent-glow: rgba(200, 136, 16, 0.25);
+  --color-accent-purple: #9b3a6e;
 
   /* Text */
-  --color-text-primary: #1e293b;
-  --color-text-secondary: #64748b;
-  --color-text-muted: #5e7088;
-  --color-text-inverse: #f1f5f9;
+  --color-text-primary: #1a1714;
+  --color-text-secondary: #5c5548;
+  --color-text-muted: #8a8276;
+
+  /* Glassmorphism (light) */
+  --color-glass-bg: rgba(255, 255, 255, 0.65);
+  --color-glass-border: rgba(0, 0, 0, 0.06);
+  --color-glass-hover: rgba(255, 255, 255, 0.9);
+
+  /* Borders */
+  --color-border-subtle: rgba(0, 0, 0, 0.06);
+  --color-border-default: #e0d5c5;
 
   /* Typography */
   --font-sans:
-    "Alibaba PuHuiTi", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
+    "Google Sans", "Inter", "Noto Sans SC", "PingFang SC", "Microsoft YaHei",
     sans-serif;
-  --font-display: "站酷高端黑", "Noto Serif SC", "STSong", serif;
+  --font-display:
+    "Google Sans", "Inter", "Noto Sans SC", "PingFang SC", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
-  --font-en-sans: "Inter", "Source Sans Pro", "Helvetica Neue", sans-serif;
-  --font-en-display: "Playfair Display", "Cormorant Garamond", serif;
 
-  /* Spacing scale */
-  --section-gap: 5rem;
-  --section-gap-sm: 3rem;
+  /* Legacy token aliases */
+  --color-primary-950: #f5ede0;
+  --color-primary-900: #fffbf5;
+  --color-primary-800: #f5ede0;
+  --color-primary-700: #ebe0cf;
+  --color-primary-600: #ffffff;
+  --color-primary-500: #c88810;
+  --color-primary-400: #9b3a6e;
+  --color-primary-300: #d43d52;
+  --color-primary-200: #5c5548;
+  --color-primary-100: #8a8276;
+  --color-accent-400: #9b3a6e;
+  --color-accent-300: #d43d52;
+  --color-accent-100: rgba(155, 58, 110, 0.1);
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5ede0;
+  --color-surface-dark: #ebe0cf;
+  --color-text-inverse: #ffffff;
+  --color-gemini-border: rgba(0, 0, 0, 0.06);
+  --color-gemini-glow: rgba(200, 136, 16, 0.2);
+
+  /* Spacing */
+  --section-gap: 6rem;
+  --section-gap-sm: 4rem;
   --content-max: 1200px;
   --content-narrow: 800px;
 }
 
-/* Base Styles */
+/* ═══════════════════════
+   Base Styles
+   ═══════════════════════ */
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: var(--color-gemini-bg);
   }
 
   body {
     font-family: var(--font-sans);
-    font-size: 16px;
+    font-size: 15px;
     line-height: 1.6;
     color: var(--color-text-primary);
-    background-color: var(--color-surface);
+    background-color: var(--color-gemini-bg);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Warm light gradient overlay */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 80% 60% at 50% 0%,
+        rgba(200, 136, 16, 0.06) 0%,
+        transparent 60%
+      ),
+      radial-gradient(
+        ellipse 60% 50% at 80% 20%,
+        rgba(224, 85, 53, 0.04) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse 50% 40% at 20% 80%,
+        rgba(155, 58, 110, 0.03) 0%,
+        transparent 50%
+      );
   }
 
   :lang(zh) {
@@ -72,8 +130,6 @@
   }
 
   :lang(en) {
-    --font-sans: var(--font-en-sans);
-    --font-display: var(--font-en-display);
     font-size: 1rem;
   }
 
@@ -84,9 +140,10 @@
   h5,
   h6 {
     font-family: var(--font-display);
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.25;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
   }
 
   h1 {
@@ -100,18 +157,61 @@
   }
 
   ::selection {
-    background-color: var(--color-primary-300);
-    color: white;
+    background-color: rgba(200, 136, 16, 0.2);
+    color: var(--color-text-primary);
   }
 }
 
-/* Scroll reveal utilities */
+/* ═══════════════════════
+   Scroll Progress Thread
+   A 1px gold line at the very top, growing as you scroll.
+   CSS-only, progressive enhancement.
+   ═══════════════════════ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  z-index: 100;
+  pointer-events: none;
+  background: linear-gradient(
+    to right,
+    var(--color-spectrum-gold),
+    var(--color-spectrum-orange),
+    var(--color-spectrum-rose)
+  );
+  transform-origin: left;
+  transform: scaleX(0);
+  will-change: transform;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root);
+    transform: none;
+    scale: 0 1;
+  }
+}
+
+@keyframes scroll-progress {
+  to {
+    scale: 1 1;
+  }
+}
+
+/* ═══════════════════════
+   Scroll Reveal
+   ═══════════════════════ */
+
 @utility scroll-reveal {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(32px);
   transition:
-    opacity 0.6s ease-out,
-    transform 0.6s ease-out;
+    opacity 1s cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 1s cubic-bezier(0.22, 0.61, 0.36, 1);
 
   &.revealed {
     opacity: 1;
@@ -119,14 +219,223 @@
   }
 }
 
-/* Floating animations */
+/* CSS-only progressive enhancement — view-timeline reveal */
+
+@utility scroll-reveal-css {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-reveal-css {
+    animation: reveal-up 1s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 30%;
+  }
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════
+   Staggered Card Reveal
+   Give cards --stagger: 0,1,2... and they ripple in.
+   ═══════════════════════ */
+
+@utility stagger-reveal {
+  --delay: calc(var(--stagger, 0) * 120ms);
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s var(--delay) cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform 0.8s var(--delay) cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+@utility stagger-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@utility stagger-reveal-css {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+@supports (animation-timeline: view()) {
+  .stagger-reveal-css {
+    animation: stagger-in 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+    animation-delay: calc(var(--stagger, 0) * 100ms);
+    animation-timeline: view();
+    animation-range: entry 0% entry 25%;
+  }
+}
+
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ═══════════════════════
+   Scroll-Driven Text Gradient
+   Headings shift from muted to gold as they enter view.
+   ═══════════════════════ */
+
+@utility text-gradient-scroll {
+  background: linear-gradient(
+    135deg,
+    var(--color-text-muted) 0%,
+    var(--color-text-secondary) 30%,
+    var(--color-spectrum-gold) 60%,
+    var(--color-spectrum-orange) 100%
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+@supports (animation-timeline: view()) {
+  .text-gradient-scroll {
+    animation: text-gradient-drive linear both;
+    animation-timeline: view();
+    animation-range: entry -20% entry 100%;
+  }
+}
+
+@keyframes text-gradient-drive {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* ═══════════════════════
+   Section Ambient Glow Shift
+   body[data-section-theme] shifts the fixed gradient.
+   ═══════════════════════ */
+
+body[data-section-theme="gold"]::before {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(200, 136, 16, 0.08) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 80% 20%,
+      rgba(224, 85, 53, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 20% 80%,
+      rgba(155, 58, 110, 0.04) 0%,
+      transparent 50%
+    );
+  transition: background 1.2s ease;
+}
+
+body[data-section-theme="rose"]::before {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(212, 61, 82, 0.07) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 80% 20%,
+      rgba(200, 136, 16, 0.05) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 20% 80%,
+      rgba(224, 85, 53, 0.04) 0%,
+      transparent 50%
+    );
+  transition: background 1.2s ease;
+}
+
+body[data-section-theme="plum"]::before {
+  background:
+    radial-gradient(
+      ellipse 80% 60% at 50% 0%,
+      rgba(155, 58, 110, 0.06) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 50% at 80% 20%,
+      rgba(212, 61, 82, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 50% 40% at 20% 80%,
+      rgba(200, 136, 16, 0.04) 0%,
+      transparent 50%
+    );
+  transition: background 1.2s ease;
+}
+
+/* ═══════════════════════
+   Keyframes
+   ═══════════════════════ */
+
+@keyframes spectrum-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px var(--color-accent-glow);
+  }
+  50% {
+    box-shadow:
+      0 0 40px var(--color-accent-glow),
+      0 0 60px rgba(155, 58, 110, 0.12);
+  }
+}
+
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 @keyframes float {
   0%,
   100% {
     transform: translateY(0) scale(1);
   }
   50% {
-    transform: translateY(-20px) scale(1.05);
+    transform: translateY(-24px) scale(1.05);
   }
 }
 
@@ -136,7 +445,7 @@
     transform: translateY(0) scale(1);
   }
   50% {
-    transform: translateY(-15px) scale(1.03);
+    transform: translateY(-16px) scale(1.03);
   }
 }
 
@@ -148,6 +457,24 @@
   50% {
     transform: translateY(-10px) scale(1.02);
   }
+}
+
+/* ═══════════════════════
+   Animation Utilities
+   ═══════════════════════ */
+
+@utility animate-spectrum {
+  background-size: 200% 200%;
+  animation: spectrum-shift 8s ease-in-out infinite;
+}
+
+@utility animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+@utility animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradient-flow 6s ease infinite;
 }
 
 @utility animate-float {
@@ -162,7 +489,53 @@
   animation: float-slower 10s ease-in-out infinite;
 }
 
-/* Motion respect */
+/* ═══════════════════════
+   Glassmorphism (light)
+   ═══════════════════════ */
+
+@utility glass {
+  background: var(--color-glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-glass-border);
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+@utility glass-hover {
+  transition: all 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+  &:hover {
+    background: var(--color-glass-hover);
+    border-color: rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.05),
+      0 0 0 4px rgba(200, 136, 16, 0.04);
+  }
+}
+
+/* ═══════════════════════
+   Gradient Text
+   ═══════════════════════ */
+
+@utility text-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--color-spectrum-gold),
+    var(--color-spectrum-orange),
+    var(--color-spectrum-rose)
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: spectrum-shift 8s ease-in-out infinite;
+}
+
+/* ═══════════════════════
+   Motion Respect
+   ═══════════════════════ */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -172,9 +545,92 @@
   }
 }
 
-/* Focus visible ring for keyboard navigation */
+/* ═══════════════════════
+   Focus Ring
+   ═══════════════════════ */
+
 :focus-visible {
-  outline: 2px solid var(--color-primary-300);
+  outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
+}
+
+/* ═══════════════════════
+   Scrollbar (light)
+   ═══════════════════════ */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.22);
+}
+
+/* ═══════════════════════
+   View Transitions — seamless page switching
+   ═══════════════════════ */
+
+@view-transition {
+  navigation: auto;
+}
+
+/* Old page: slide out left + fade */
+::view-transition-old(root) {
+  animation: vt-slide-out 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* New page: slide in from right + fade */
+::view-transition-new(root) {
+  animation: vt-slide-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes vt-slide-out {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+}
+
+@keyframes vt-slide-in {
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Header morph transition — keeps header stable across navigations */
+::view-transition-group(header) {
+  z-index: 100;
+  animation-duration: 0.35s;
+}
+
+/* Main content — gentle slide + fade */
+::view-transition-group(main) {
+  animation-duration: 0.5s;
+}
+
+/* Reduce motion for view transitions */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+  ::view-transition-group(root) {
+    animation-duration: 0s !important;
+  }
 }

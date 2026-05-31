@@ -1,41 +1,40 @@
 ---
-import { PARTNERS } from "@/lib/constants";
 import ScrollReveal from "@/components/common/ScrollReveal.astro";
 
 const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 
 const partnerDetails = [
-  { name: "ByteDance", color: "from-sky-500 to-blue-600", abbr: "字节" },
-  { name: "Alibaba", color: "from-orange-500 to-red-500", abbr: "阿里" },
-  { name: "MiraclePlus", color: "from-emerald-500 to-teal-600", abbr: "奇绩" },
-  { name: "Datawhale", color: "from-violet-500 to-purple-600", abbr: "DW" },
-  { name: "ZhenFund", color: "from-rose-500 to-pink-600", abbr: "真格" },
-  { name: "Momenta", color: "from-cyan-500 to-blue-500", abbr: "MT" },
-  { name: "Tencent", color: "from-blue-400 to-indigo-500", abbr: "腾讯" },
+  { name: "ByteDance", color: "from-[#1A5FFF] to-[#5B4BEA]", abbr: "字节" },
+  { name: "Alibaba", color: "from-[#FF6A00] to-[#EE0979]", abbr: "阿里" },
+  { name: "MiraclePlus", color: "from-[#00BFA5] to-[#1A5FFF]", abbr: "奇绩" },
+  { name: "Datawhale", color: "from-[#5B4BEA] to-[#8B5CF6]", abbr: "DW" },
+  { name: "ZhenFund", color: "from-[#EE0979] to-[#FF6A00]", abbr: "真格" },
+  { name: "Momenta", color: "from-[#00BFA5] to-[#5B4BEA]", abbr: "MT" },
+  { name: "Tencent", color: "from-[#1A5FFF] to-[#00BFA5]", abbr: "腾讯" },
 ];
 ---
 
-<section class="bg-surface-alt border-t border-slate-200 py-20">
+<section class="border-border-subtle border-t py-20">
   <div class="mx-auto max-w-5xl px-6">
     <ScrollReveal>
       <p
-        class="text-text-muted mb-2 text-center text-sm font-semibold tracking-[0.2em] uppercase"
+        class="text-text-muted mb-2 text-center text-xs font-semibold tracking-[0.2em] uppercase"
       >
         {lang === "en" ? "Trusted by Industry Leaders" : "合作企业 & 社区"}
       </p>
     </ScrollReveal>
 
-    <div class="mt-10 flex flex-wrap items-center justify-center gap-4">
+    <div class="mt-10 flex flex-wrap items-center justify-center gap-3">
       {
         partnerDetails.map((p, i) => (
           <ScrollReveal class={`delay-${i * 100}`}>
-            <div class="group flex cursor-default items-center gap-3 rounded-xl border border-slate-200/60 bg-white px-5 py-3 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-slate-300 hover:shadow-md">
+            <div class="glass glass-hover flex cursor-default items-center gap-3 rounded-xl px-5 py-3">
               <div
                 class={`flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${p.color} text-xs font-bold text-white shadow-sm`}
               >
                 {p.abbr}
               </div>
-              <span class="text-text-primary text-sm font-semibold">
+              <span class="text-text-primary text-sm font-medium">
                 {p.name}
               </span>
             </div>
