@@ -47,7 +47,7 @@ const titleChars = [...title];
     class="hero-content relative z-10 mx-auto max-w-4xl px-6 py-32 text-center"
   >
     <!-- Spark Brand Icon -->
-    <div class="scroll-reveal mb-12 flex justify-center">
+    <div class="mb-12 flex justify-center">
       <div
         class="spark-frame animate-pulse-glow relative flex h-24 w-24 items-center justify-center rounded-full"
       >
@@ -83,7 +83,7 @@ const titleChars = [...title];
 
     <!-- Badge -->
     <div
-      class="scroll-reveal border-accent/20 bg-accent/5 mb-10 inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm backdrop-blur-sm"
+      class="border-accent/20 bg-accent/5 mb-10 inline-flex items-center gap-2 rounded-full border px-5 py-2 text-sm backdrop-blur-sm"
     >
       <span class="bg-accent h-1.5 w-1.5 animate-pulse rounded-full"></span>
       <span class="text-accent font-medium tracking-wide">
@@ -92,33 +92,31 @@ const titleChars = [...title];
     </div>
 
     <!-- Decorative top rule — classical gold line with diamond -->
-    <div class="scroll-reveal ornamental-rule mb-8"></div>
+    <div class="ornamental-rule mb-8"></div>
 
     <!-- Main Title — Luxury Art Text -->
-    <h1 class="scroll-reveal luxury-title mb-6" aria-label={title}>
+    <h1 class="luxury-title mb-6" aria-label={title}>
       {
         titleChars.map((char, i) => (
           <span class="title-char" style={`animation-delay: ${i * 0.12}s`}>
-            {char === " " ? " " : char}
+            {char === " " ? "\xa0" : char}
           </span>
         ))
       }
     </h1>
 
     <!-- Decorative bottom rule — mirrors the top -->
-    <div class="scroll-reveal ornamental-rule mb-8"></div>
+    <div class="ornamental-rule mb-8"></div>
 
     <!-- Subtitle -->
     <p
-      class="scroll-reveal text-text-secondary mx-auto mb-14 max-w-xl text-lg leading-relaxed tracking-wide md:text-xl"
+      class="text-text-secondary mx-auto mb-14 max-w-xl text-lg leading-relaxed tracking-wide md:text-xl"
     >
       {lang === "en" ? SITE.descriptionEn : SITE.description}
     </p>
 
     <!-- CTAs -->
-    <div
-      class="scroll-reveal flex flex-col items-center justify-center gap-4 sm:flex-row"
-    >
+    <div class="flex flex-col items-center justify-center gap-4 sm:flex-row">
       <a
         href={lang === "en" ? "/en/about" : "/about"}
         class="btn-primary btn-shimmer btn-halo group inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold"
@@ -173,40 +171,6 @@ const titleChars = [...title];
     font-weight: 900;
     line-height: 1.08;
     letter-spacing: 0.03em;
-
-    /* Metallic gradient: gold → bright gold → rose → copper */
-    background: linear-gradient(
-      135deg,
-      #c88810 0%,
-      #f0d060 20%,
-      #e8a820 35%,
-      #d43d52 55%,
-      #e05535 70%,
-      #c88810 85%,
-      #f0d060 100%
-    );
-    background-size: 300% 300%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-
-    animation: luxury-shimmer 5s ease-in-out infinite;
-
-    /* Stacked filter for micro depth */
-    filter: drop-shadow(0 2px 4px rgba(200, 136, 16, 0.2));
-  }
-
-  /* Shimmer sweep — a bright highlight travels across the metallic text */
-  @keyframes luxury-shimmer {
-    0% {
-      background-position: 0% 50%;
-    }
-    50% {
-      background-position: 100% 50%;
-    }
-    100% {
-      background-position: 0% 50%;
-    }
   }
 
   /* ═══════════════════════════════════════════
@@ -316,6 +280,11 @@ const titleChars = [...title];
   }
 
   @keyframes hero-exit {
+    from {
+      scale: 1;
+      opacity: 1;
+      filter: blur(0);
+    }
     to {
       scale: 0.96;
       opacity: 0.15;
@@ -344,9 +313,9 @@ const titleChars = [...title];
   .spotlight {
     background: radial-gradient(
       ellipse 60% 50% at var(--cursor-x, 50%) var(--cursor-y, 40%),
-      rgba(200, 136, 16, 0.15) 0%,
-      rgba(200, 136, 16, 0.05) 30%,
-      rgba(224, 85, 53, 0.03) 50%,
+      rgba(200, 136, 16, 0.07) 0%,
+      rgba(200, 136, 16, 0.03) 30%,
+      rgba(224, 85, 53, 0.015) 50%,
       transparent 70%
     );
   }
@@ -361,12 +330,12 @@ const titleChars = [...title];
 
   @keyframes spotlight-bloom {
     from {
-      opacity: 0.3;
-      filter: brightness(0.4);
+      opacity: 0.2;
+      filter: brightness(0.35);
     }
     to {
-      opacity: 1;
-      filter: brightness(1);
+      opacity: 0.7;
+      filter: brightness(0.8);
     }
   }
 
@@ -419,7 +388,7 @@ const titleChars = [...title];
             // Warmer, larger glow over interactive elements
             const target = latest.target as HTMLElement;
             const isInteractive = target?.closest("a, button, [data-tilt]");
-            spotlight.style.opacity = isInteractive ? "1" : "0.6";
+            spotlight.style.opacity = isInteractive ? "0.65" : "0.35";
             ticking = false;
             latest = null;
           });

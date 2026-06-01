@@ -12,17 +12,16 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
         METRICS.map((metric, i) => (
           <ScrollReveal class="text-center">
             <div
-              class="scene-montage-in text-gradient text-4xl font-extrabold tracking-tight md:text-5xl"
+              class="scene-montage-in text-4xl font-extrabold tracking-tight md:text-5xl"
               style={`animation-delay: ${i * 100}ms`}
             >
               <span
-                class="counter"
+                class="counter text-gradient"
                 data-target={metric.value}
                 data-suffix={metric.suffix}
               >
                 0
               </span>
-              {metric.suffix}
             </div>
             <p
               class="scene-montage-in text-text-secondary mt-2 text-sm"

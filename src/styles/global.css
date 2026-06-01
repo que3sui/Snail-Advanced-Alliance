@@ -807,16 +807,41 @@ body[data-section-theme="plum"]::before {
    Character Reveal
    ═══════════════════════ */
 
-/* 标题字符浮现 */
+/* 标题字符浮现 — 每个字符独立渐变文字 + 逐字浮现 + 流光 */
 @utility title-char {
   display: inline-block;
-  opacity: 0;
-  animation: char-reveal 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
-  animation-play-state: paused;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  background: linear-gradient(
+    135deg,
+    #c88810 0%,
+    #f0d060 20%,
+    #e8a820 35%,
+    #d43d52 55%,
+    #e05535 70%,
+    #c88810 85%,
+    #f0d060 100%
+  );
+  background-size: 300% 300%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(200, 136, 16, 0.2));
+  animation:
+    char-reveal 1s cubic-bezier(0.22, 0.61, 0.36, 1) both,
+    title-shimmer 5s ease-in-out infinite;
 }
 
-.reveal-started .title-char {
-  animation-play-state: running;
+@keyframes title-shimmer {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
 }
 
 /* ═══════════════════════

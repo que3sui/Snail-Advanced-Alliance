@@ -54,78 +54,103 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
 
 <script is:inline src="/pagefind/pagefind-component-ui.js"></script>
 <script is:inline>
-  // Scroll reveal observer
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("revealed");
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-  );
+  var _scrollObserver = null;
+  var _staggerObserver = null;
 
-  document
-    .querySelectorAll(".scroll-reveal")
-    .forEach((el) => observer.observe(el));
+  function setupScrollReveal() {
+    if (_scrollObserver) _scrollObserver.disconnect();
+    if (_staggerObserver) _staggerObserver.disconnect();
 
-  // Stagger reveal observer
-  const staggerObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("stagger-revealed");
-        }
-      });
-    },
-    { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
-  );
-
-  document
-    .querySelectorAll(".stagger-reveal")
-    .forEach((el) => staggerObserver.observe(el));
-
-  // Section ambient glow shift — watch themed sections and shift body gradient
-  {
-    const sections = document.querySelectorAll<HTMLElement>(
-      "[data-section-theme]",
+    _scrollObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("revealed");
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
     );
-    if (sections.length) {
-      let ticking = false;
-      const updateTheme = () => {
-        let best: HTMLElement | null = null;
-        let bestRatio = 0;
-        const vh = window.innerHeight;
-        sections.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          const visibleTop = Math.max(0, rect.top);
-          const visibleBottom = Math.min(vh, rect.bottom);
-          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-          const ratio = visibleHeight / rect.height;
+
+    document
+      .querySelectorAll(".scroll-reveal:not(.revealed)")
+      .forEach(function (el) {
+        _scrollObserver.observe(el);
+      });
+
+    _staggerObserver = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("stagger-revealed");
+          }
+        });
+      },
+      { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+    );
+
+    document
+      .querySelectorAll(".stagger-reveal:not(.stagger-revealed)")
+      .forEach(function (el) {
+        _staggerObserver.observe(el);
+      });
+  }
+
+  var _themeScrollHandler = null;
+
+  function setupSectionTheme() {
+    var sections = document.querySelectorAll("[data-section-theme]");
+    if (!sections.length) return;
+
+    if (_themeScrollHandler) {
+      window.removeEventListener("scroll", _themeScrollHandler);
+    }
+
+    var ticking = false;
+    _themeScrollHandler = function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var best = null;
+        var bestRatio = 0;
+        var vh = window.innerHeight;
+        sections.forEach(function (el) {
+          var rect = el.getBoundingClientRect();
+          var visibleTop = Math.max(0, rect.top);
+          var visibleBottom = Math.min(vh, rect.bottom);
+          var visibleHeight = Math.max(0, visibleBottom - visibleTop);
+          var ratio = visibleHeight / rect.height;
           if (ratio > bestRatio) {
             bestRatio = ratio;
             best = el;
           }
         });
         if (best) {
-          document.body.dataset.sectionTheme = best.dataset.sectionTheme ?? "";
+          document.body.dataset.sectionTheme = best.dataset.sectionTheme || "";
         }
         ticking = false;
-      };
-      window.addEventListener(
-        "scroll",
-        () => {
-          if (!ticking) {
-            requestAnimationFrame(updateTheme);
-            ticking = true;
-          }
-        },
-        { passive: true },
-      );
-      updateTheme();
-    }
+      });
+    };
+
+    window.addEventListener("scroll", _themeScrollHandler, { passive: true });
+    _themeScrollHandler();
   }
+
+  setupScrollReveal();
+  setupSectionTheme();
+
+  document.addEventListener("astro:before-swap", function () {
+    if (_scrollObserver) _scrollObserver.disconnect();
+    if (_staggerObserver) _staggerObserver.disconnect();
+    if (_themeScrollHandler) {
+      window.removeEventListener("scroll", _themeScrollHandler);
+    }
+  });
+
+  document.addEventListener("astro:after-swap", function () {
+    setupScrollReveal();
+    setupSectionTheme();
+  });
 </script>
 
 <style is:global>
