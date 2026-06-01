@@ -41,7 +41,7 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
       {lang === "en" ? "Skip to content" : "跳转到内容"}
     </a>
     <Header />
-    <main id="main-content" transition:name="main" transition:animate="slide">
+    <main id="main-content" transition:name="main">
       <slot />
     </main>
     <Footer />
