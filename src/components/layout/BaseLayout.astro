@@ -87,42 +87,45 @@ const lang = Astro.url.pathname.startsWith("/en") ? "en" : "zh";
     .forEach((el) => staggerObserver.observe(el));
 
   // Section ambient glow shift — watch themed sections and shift body gradient
-  const glowObserver = new IntersectionObserver(
-    (entries) => {
-      // Find the most visible section and apply its theme
-      let best = null;
-      let bestRatio = 0;
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
-          bestRatio = entry.intersectionRatio;
-          best = entry.target;
+  {
+    const sections = document.querySelectorAll<HTMLElement>(
+      "[data-section-theme]",
+    );
+    if (sections.length) {
+      let ticking = false;
+      const updateTheme = () => {
+        let best: HTMLElement | null = null;
+        let bestRatio = 0;
+        const vh = window.innerHeight;
+        sections.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          const visibleTop = Math.max(0, rect.top);
+          const visibleBottom = Math.min(vh, rect.bottom);
+          const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+          const ratio = visibleHeight / rect.height;
+          if (ratio > bestRatio) {
+            bestRatio = ratio;
+            best = el;
+          }
+        });
+        if (best) {
+          document.body.dataset.sectionTheme = best.dataset.sectionTheme ?? "";
         }
-        // Remove stale entries
-        if (!entry.isIntersecting && entry.target === best) {
-          best = null;
-          bestRatio = 0;
-        }
-      });
-      // Re-scan all visible entries to find the best
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && entry.intersectionRatio > bestRatio) {
-          bestRatio = entry.intersectionRatio;
-          best = entry.target;
-        }
-      });
-      if (best) {
-        const theme = best.dataset.sectionTheme;
-        if (theme) {
-          document.body.dataset.sectionTheme = theme;
-        }
-      }
-    },
-    { threshold: [0, 0.3, 0.6] },
-  );
-
-  document
-    .querySelectorAll("[data-section-theme]")
-    .forEach((el) => glowObserver.observe(el));
+        ticking = false;
+      };
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (!ticking) {
+            requestAnimationFrame(updateTheme);
+            ticking = true;
+          }
+        },
+        { passive: true },
+      );
+      updateTheme();
+    }
+  }
 </script>
 
 <style is:global>
