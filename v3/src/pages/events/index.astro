@@ -1,0 +1,46 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import EventCard from "../../components/EventCard.astro";
+import { TAG_LABELS } from "../../lib/constants";
+
+const events = (await getCollection("events")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+
+const groups = new Map<string, typeof events>();
+for (const e of events) {
+  const list = groups.get(e.data.tag) ?? [];
+  list.push(e);
+  groups.set(e.data.tag, list);
+}
+const ordered = [...groups.entries()];
+---
+
+<Base
+  title={`活动 — 蜗壳进阶联盟`}
+  description="蜗壳进阶联盟的全部活动：讲座、工作坊、黑客松、讲坛、进阶营。"
+>
+  <div class="pt-12">
+    <SectionTitle no="EV" title="活动" en="EVENTS ARCHIVE" />
+  </div>
+  {
+    ordered.map(([tag, list]) => (
+      <section class="mb-12">
+        <h2 class="font-display mb-4 text-2xl font-black">
+          <span class="border-ink bg-lemon mr-2 inline-block h-3 w-3 translate-y-[-2px] rounded-full border-2" />
+          {TAG_LABELS[tag] ?? tag}
+          <span class="ml-2 font-mono text-sm font-normal opacity-50">
+            {list.length} 场
+          </span>
+        </h2>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {list.map((e) => (
+            <EventCard event={e} />
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</Base>

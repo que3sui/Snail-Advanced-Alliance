@@ -1,0 +1,46 @@
+---
+interface Props {
+  dialogue: {
+    id: string;
+    data: {
+      title: string;
+      interviewee: string;
+      intervieweeTitle: string;
+      date: Date;
+      summary: string;
+      tags?: string[];
+    };
+  };
+}
+const { dialogue } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const dateStr = dialogue.data.date.toLocaleDateString("zh-CN", {
+  year: "numeric",
+  month: "long",
+});
+---
+
+<a
+  href={`${base}dialogues/${dialogue.id}/`}
+  class="nb-card block p-5 no-underline"
+>
+  <div class="flex items-baseline justify-between gap-3">
+    <h3 class="font-display text-xl font-black">
+      对谈 {dialogue.data.interviewee}
+    </h3>
+    <span class="shrink-0 font-mono text-xs opacity-60">{dateStr}</span>
+  </div>
+  <p class="text-snail-deep mt-0.5 text-sm font-bold">
+    {dialogue.data.intervieweeTitle}
+  </p>
+  <p class="text-ink-soft mt-2 line-clamp-2 text-sm">{dialogue.data.summary}</p>
+  {
+    dialogue.data.tags && (
+      <div class="mt-3 flex flex-wrap gap-1.5">
+        {dialogue.data.tags.map((t) => (
+          <span class="nb-tag bg-cream">{t}</span>
+        ))}
+      </div>
+    )
+  }
+</a>

@@ -1,0 +1,19 @@
+---
+import { SITE_SLOGAN } from "../../lib/constants";
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="py-12">
+  <div class="nb-card bg-snail p-8 text-center sm:p-12">
+    <h2 class="font-display text-paper text-3xl font-black sm:text-4xl">
+      准备好一起折腾了吗？
+    </h2>
+    <p class="text-paper/90 mt-3">{SITE_SLOGAN}</p>
+    <a
+      href={`${base}join/`}
+      class="nb-btn bg-paper text-ink mt-6 px-8 py-3 text-lg no-underline"
+    >
+      加入蜗壳 →
+    </a>
+  </div>
+</section>

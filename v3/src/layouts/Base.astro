@@ -1,0 +1,41 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_NAME } from "../lib/constants";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${SITE_NAME} — 让喜欢折腾的人凑在一起折腾`,
+  description = "蜗壳进阶联盟：中科大学生自组织，讲座、黑客松、工作坊、访谈，让喜欢折腾的人凑在一起折腾。",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link
+      rel="icon"
+      href={`${import.meta.env.BASE_URL}favicon.svg`}
+      type="image/svg+xml"
+    />
+    <script
+      src="https://fonts.font.im/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+      is:inline></script>
+  </head>
+  <body>
+    <Header />
+    <main class="mx-auto max-w-5xl px-5 pb-20">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

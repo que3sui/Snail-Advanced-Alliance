@@ -1,0 +1,25 @@
+---
+import { SITE_NAME, SITE_SLOGAN } from "../lib/constants";
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t-2.5 border-ink bg-ink text-paper">
+  <div
+    class="mx-auto flex max-w-5xl flex-col items-center gap-3 px-5 py-8 text-center"
+  >
+    <img
+      src={`${base}mascot/snail.svg`}
+      alt=""
+      class="h-10 w-10 invert transition-transform hover:-rotate-6"
+    />
+    <p class="font-display text-base font-black">{SITE_NAME}</p>
+    <p class="text-paper/70 font-mono text-xs">{SITE_SLOGAN}</p>
+    <p class="text-paper/50 font-mono text-[11px]">
+      © {year} USTC 学生自组织 · <a
+        href="/rss.xml"
+        class="hover:text-lemon underline decoration-dotted">RSS</a
+      >
+    </p>
+  </div>
+</footer>

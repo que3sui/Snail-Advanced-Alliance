@@ -1,0 +1,26 @@
+{
+  "name": "snail-alliance-v3",
+  "version": "3.0.0",
+  "description": "蜗壳进阶联盟官方网站 v3",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "keywords": [],
+  "author": "蜗壳进阶联盟",
+  "license": "MIT",
+  "dependencies": {
+    "@astrojs/rss": "4.0.18",
+    "@astrojs/sitemap": "3.7.3",
+    "@tailwindcss/typography": "0.5.19",
+    "@tailwindcss/vite": "4.3.0",
+    "astro": "6.4.2",
+    "tailwindcss": "4.3.0"
+  },
+  "devDependencies": {
+    "typescript": "6.0.3",
+    "vite": "7.3.3"
+  }
+}

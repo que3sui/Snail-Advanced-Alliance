@@ -1,0 +1,23 @@
+---
+interface Props {
+  eventCount: number;
+  guestCount: number;
+  yearSpan: string;
+}
+const { eventCount, guestCount, yearSpan } = Astro.props;
+---
+
+<section class="grid grid-cols-1 gap-4 py-8 sm:grid-cols-3">
+  <div class="nb-flat bg-sky p-5 text-center">
+    <p class="font-display text-4xl font-black">{eventCount}+</p>
+    <p class="mt-1 font-mono text-xs font-bold tracking-widest">场活动</p>
+  </div>
+  <div class="nb-flat bg-lemon p-5 text-center">
+    <p class="font-display text-4xl font-black">{guestCount}+</p>
+    <p class="mt-1 font-mono text-xs font-bold tracking-widest">位分享嘉宾</p>
+  </div>
+  <div class="nb-flat bg-grass text-paper p-5 text-center">
+    <p class="font-display text-4xl font-black">{yearSpan}</p>
+    <p class="mt-1 font-mono text-xs font-bold tracking-widest">持续折腾中</p>
+  </div>
+</section>

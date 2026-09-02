@@ -1,0 +1,86 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+---
+
+<Base title={`加入 — 蜗壳进阶联盟`}>
+  <div class="pt-12">
+    <SectionTitle no="JO" title="加入蜗壳" en="JOIN US" />
+  </div>
+
+  <section class="nb-card bg-snail p-8 text-center sm:p-12">
+    <h2 class="font-display text-paper text-3xl font-black">
+      三种方式找到我们
+    </h2>
+    <p class="text-paper/90 mt-2">都在群里，来了就是自己人。</p>
+  </section>
+
+  <section class="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+    <div class="nb-card bg-white p-5">
+      <p class="nb-tag bg-lemon">QQ 群</p>
+      <p class="font-display mt-3 text-xl font-black">蜗壳进阶联盟主群</p>
+      <p class="text-ink-soft mt-1 text-sm">
+        群号见校内海报与宣讲现场，或通过邮箱联系我们入群。
+      </p>
+    </div>
+    <div class="nb-card bg-white p-5">
+      <p class="nb-tag bg-sky">活动报名</p>
+      <p class="font-display mt-3 text-xl font-black">讲座 / 工作坊 / 黑客松</p>
+      <p class="text-ink-soft mt-1 text-sm">
+        每场活动在群内与公众号发布报名入口，先到先得。
+      </p>
+    </div>
+    <div class="nb-card bg-white p-5">
+      <p class="nb-tag bg-grass text-paper">合作 / 分享</p>
+      <p class="font-display mt-3 text-xl font-black">想来讲点什么？</p>
+      <p class="text-ink-soft mt-1 text-sm">
+        欢迎邮件勾搭：
+        <a
+          href="mailto:hello@advancedguide.cn"
+          class="text-snail-deep font-bold underline decoration-2 underline-offset-4"
+          >hello@advancedguide.cn</a
+        >
+      </p>
+    </div>
+  </section>
+
+  <section class="mt-12">
+    <SectionTitle no="01" title="新生指南" en="FAQ" />
+    <div class="space-y-3">
+      <details class="nb-flat bg-white p-5" open>
+        <summary class="cursor-pointer font-bold">
+          我是大一新生，什么都不太会，能参加吗？
+        </summary>
+        <p class="text-ink-soft mt-3 text-sm leading-relaxed">
+          能，而且最欢迎你。讲座听个耳熟、工作坊跟着敲、黑客松来打杂——所有过来人都是从"什么都不太会"开始的。门槛不是技术，是好奇心。
+        </p>
+      </details>
+      <details class="nb-flat bg-white p-5">
+        <summary class="cursor-pointer font-bold">
+          蜗壳和其他社团有什么区别？
+        </summary>
+        <p class="text-ink-soft mt-3 text-sm leading-relaxed">
+          我们不做常规部门事务，只做一件事：把校内外值得听的、值得做的、值得聊的人和组织起来。不绑定方向，不设
+          KPI，折腾完一场就散，散了再聚下一场。
+        </p>
+      </details>
+      <details class="nb-flat bg-white p-5">
+        <summary class="cursor-pointer font-bold">
+          想自己办活动，蜗壳能提供什么？
+        </summary>
+        <p class="text-ink-soft mt-3 text-sm leading-relaxed">
+          场地协调、宣传渠道、嘉宾牵线、组队支持，以及一群帮你吆喝的人。带着想法来群里说，可行我们就一起干。
+        </p>
+      </details>
+      <details class="nb-flat bg-white p-5">
+        <summary class="cursor-pointer font-bold">
+          非科大的同学可以参加吗？
+        </summary>
+        <p class="text-ink-soft mt-3 text-sm leading-relaxed">
+          线上活动与内容（含本站
+          RSS）完全开放。线下活动优先校内，外校朋友想来的话提前联系群管理员即可。
+        </p>
+      </details>
+    </div>
+  </section>
+</Base>

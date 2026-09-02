@@ -1,0 +1,31 @@
+---
+const items = [
+  "讲座分享",
+  "黑客松",
+  "工作坊",
+  "校友讲坛",
+  "进阶营",
+  "深度访谈",
+  "Vibe Coding",
+  "AI 前沿",
+  "组队折腾",
+];
+const strip = items.map((t) => `✦ ${t}`).join("　");
+---
+
+<div
+  class="border-y-2.5 border-ink bg-snail overflow-hidden py-1.5 select-none"
+  aria-hidden="true"
+>
+  <div class="marquee-track">
+    <span
+      class="text-paper shrink-0 pr-8 font-mono text-sm font-bold whitespace-nowrap"
+      >{strip}
+    </span>
+    <span
+      class="text-paper shrink-0 pr-8 font-mono text-sm font-bold whitespace-nowrap"
+      aria-hidden="true"
+      >{strip}
+    </span>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+---
+import Base from "../layouts/Base.astro";
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title={`404 — 蜗壳进阶联盟`}>
+  <section class="flex flex-col items-center pt-24 pb-16 text-center">
+    <img
+      src={`${base}mascot/snail.svg`}
+      alt="迷路的蜗牛"
+      class="h-36 w-36 -rotate-12"
+      onmouseover="this.src=`${base}mascot/snail-blink.svg`"
+      onmouseout="this.src=`${base}mascot/snail.svg`"
+    />
+    <h1 class="font-display mt-6 text-5xl font-black">404</h1>
+    <p class="text-ink-soft mt-2 text-lg">蜗牛爬丢了——这个页面不存在。</p>
+    <a href={base} class="nb-btn bg-lemon mt-8 px-6 py-3 text-lg no-underline">
+      ← 回到首页
+    </a>
+  </section>
+</Base>

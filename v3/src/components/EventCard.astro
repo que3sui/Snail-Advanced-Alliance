@@ -1,0 +1,45 @@
+---
+import TagPill from "./TagPill.astro";
+import { TAG_LABELS } from "../lib/constants";
+
+interface Props {
+  event: {
+    id: string;
+    data: {
+      title: string;
+      date: Date;
+      tag: string;
+      guest?: string;
+      summary: string;
+    };
+  };
+}
+const { event } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const dateStr = event.data.date.toLocaleDateString("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<a href={`${base}events/${event.id}/`} class="nb-card block p-5 no-underline">
+  <div class="mb-2 flex items-center gap-2">
+    <TagPill tag={event.data.tag} />
+    <span class="font-mono text-xs opacity-60">{dateStr}</span>
+  </div>
+  <h3 class="font-display text-lg leading-snug font-black">
+    {event.data.title}
+  </h3>
+  {
+    event.data.guest && (
+      <p class="text-snail-deep mt-1 text-sm font-bold">
+        嘉宾：{event.data.guest}
+      </p>
+    )
+  }
+  <p class="text-ink-soft mt-2 line-clamp-2 text-sm">{event.data.summary}</p>
+  <p class="mt-3 font-mono text-xs font-bold">
+    {TAG_LABELS[event.data.tag] ?? ""} →
+  </p>
+</a>

@@ -1,0 +1,26 @@
+---
+import SectionTitle from "../SectionTitle.astro";
+import DialogueCard from "../DialogueCard.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  dialogues: CollectionEntry<"dialogues">[];
+}
+const { dialogues } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="py-10">
+  <SectionTitle no="03" title="深度访谈" en="DIALOGUES" />
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+    {dialogues.map((d) => <DialogueCard dialogue={d} />)}
+  </div>
+  <div class="mt-6 text-right">
+    <a
+      href={`${base}dialogues/`}
+      class="nb-btn bg-white px-4 py-2 no-underline"
+    >
+      全部访谈 →
+    </a>
+  </div>
+</section>

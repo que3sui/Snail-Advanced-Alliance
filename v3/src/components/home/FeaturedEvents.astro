@@ -1,0 +1,23 @@
+---
+import SectionTitle from "../SectionTitle.astro";
+import EventCard from "../EventCard.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  events: CollectionEntry<"events">[];
+}
+const { events } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="py-10">
+  <SectionTitle no="02" title="近期活动" en="EVENTS" />
+  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    {events.map((e) => <EventCard event={e} />)}
+  </div>
+  <div class="mt-6 text-right">
+    <a href={`${base}events/`} class="nb-btn bg-white px-4 py-2 no-underline">
+      全部活动 →
+    </a>
+  </div>
+</section>

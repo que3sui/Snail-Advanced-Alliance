@@ -1,0 +1,144 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-paper: #faf7f2;
+  --color-ink: #141414;
+  --color-ink-soft: #4a4a46;
+  --color-snail: #f97316;
+  --color-snail-deep: #c2410c;
+  --color-grass: #22c55e;
+  --color-sky: #38bdf8;
+  --color-lemon: #facc15;
+  --color-cream: #f3ede2;
+
+  --font-display: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-body: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "Cascadia Code", ui-monospace, monospace;
+
+  --shadow-hard: 4px 4px 0 0 var(--color-ink);
+  --shadow-hard-sm: 3px 3px 0 0 var(--color-ink);
+  --shadow-hard-lg: 7px 7px 0 0 var(--color-ink);
+
+  --animate-marquee: marquee 28s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.8;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(
+    var(--color-cream) 1.2px,
+    transparent 1.2px
+  );
+  background-size: 22px 22px;
+}
+
+::selection {
+  background: var(--color-snail);
+  color: var(--color-paper);
+}
+
+/* ---------- neo-brutalist 基件 ---------- */
+
+.nb-card {
+  border: 2.5px solid var(--color-ink);
+  background: #fff;
+  box-shadow: var(--shadow-hard);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.nb-card:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+.nb-flat {
+  border: 2.5px solid var(--color-ink);
+  background: #fff;
+}
+
+.nb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: 2.5px solid var(--color-ink);
+  box-shadow: var(--shadow-hard);
+  font-weight: 700;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.nb-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+
+.nb-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 1px 1px 0 0 var(--color-ink);
+}
+
+.nb-tag {
+  display: inline-block;
+  border: 2px solid var(--color-ink);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.1rem 0.55rem;
+  line-height: 1.6;
+}
+
+.sticker {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.sticker:hover {
+  transform: rotate(0deg) scale(1.06);
+}
+
+/* ---------- marquee ---------- */
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: var(--animate-marquee);
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ---------- prose 微调 ---------- */
+
+.prose :where(h2):not(:where([class~="not-prose"] *)) {
+  font-weight: 900;
+  border-bottom: 2.5px solid var(--color-ink);
+  padding-bottom: 0.35rem;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: var(--color-snail-deep);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 3px;
+}

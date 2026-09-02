@@ -1,0 +1,76 @@
+---
+import Base from "../layouts/Base.astro";
+import SectionTitle from "../components/SectionTitle.astro";
+---
+
+<Base title={`关于 — 蜗壳进阶联盟`}>
+  <div class="pt-12">
+    <SectionTitle no="AB" title="关于蜗壳" en="ABOUT" />
+  </div>
+
+  <section class="nb-card bg-white p-6 sm:p-10">
+    <h2 class="font-display text-2xl font-black">我们是谁</h2>
+    <p class="text-ink-soft mt-4 leading-relaxed">
+      蜗壳进阶联盟是中科大学生自发组织的科技社群。"蜗壳"既是科大人对母校的爱称，也是我们的自我期许：像蜗牛一样，背着自己的壳，认准方向，慢慢爬，不停下。
+    </p>
+    <p class="text-ink-soft mt-3 leading-relaxed">
+      我们做四件事：请人来<b>讲</b
+      >（前沿讲座与校友讲坛）、带着做（黑客松与工作坊）、陪人聊（深度访谈与职业规划）、聚拢人（进阶营与日常组队）。让想折腾的人少走弯路，让走过路的人被听见。
+    </p>
+  </section>
+
+  <section class="mt-10">
+    <SectionTitle no="01" title="里程碑" en="MILESTONES" />
+    <ol class="space-y-0">
+      <li class="nb-flat flex gap-4 bg-white p-5">
+        <span class="nb-tag bg-lemon h-fit shrink-0">2025</span>
+        <div>
+          <p class="font-bold">联盟起步</p>
+          <p class="text-ink-soft mt-1 text-sm">
+            第一场前沿趋势分享会落地，陆奇老师开讲。蜗壳的分子开始聚拢。
+          </p>
+        </div>
+      </li>
+      <li class="nb-flat mt-3 flex gap-4 bg-white p-5">
+        <span class="nb-tag bg-grass text-paper h-fit shrink-0">2026</span>
+        <div>
+          <p class="font-bold">全面开花</p>
+          <p class="text-ink-soft mt-1 text-sm">
+            徽客松 AI 黑客松、蜗壳有约校友讲坛、Vibe Coding
+            工作坊、蜗壳进阶营相继落地，深度访谈栏目开张。活动常态化，社区初具规模。
+          </p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section class="mt-10">
+    <SectionTitle no="02" title="我们在做什么" en="WHAT WE DO" />
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <div class="nb-flat bg-lemon p-5">
+        <p class="font-display text-lg font-black">讲 · 讲座讲坛</p>
+        <p class="text-ink-soft mt-1 text-sm">
+          前沿趋势、AI 技术、行业判断，把窗外的事带进来。
+        </p>
+      </div>
+      <div class="nb-flat bg-sky p-5">
+        <p class="font-display text-lg font-black">做 · 黑客松工作坊</p>
+        <p class="text-ink-soft mt-1 text-sm">
+          48 小时从零到 demo，动手产出大于坐而论道。
+        </p>
+      </div>
+      <div class="nb-flat bg-grass text-paper p-5">
+        <p class="font-display text-lg font-black">聊 · 深度访谈</p>
+        <p class="text-paper/90 mt-1 text-sm">
+          和走过路的人认真聊一次，把选择与坑留给后来人。
+        </p>
+      </div>
+      <div class="nb-flat bg-cream p-5">
+        <p class="font-display text-lg font-black">聚 · 进阶营</p>
+        <p class="text-ink-soft mt-1 text-sm">
+          长周期的小组共创，让折腾成为习惯而非活动。
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>

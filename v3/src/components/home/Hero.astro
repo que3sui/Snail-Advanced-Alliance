@@ -1,0 +1,26 @@
+---
+import { SITE_NAME, SITE_SLOGAN } from "../../lib/constants";
+const base = import.meta.env.BASE_URL;
+---
+
+<section class="relative pt-14 pb-10">
+  <img
+    src={`${base}mascot/snail-hello.svg`}
+    alt="蜗牛吉祥物"
+    class="sticker absolute top-10 right-2 h-20 w-20 -rotate-6 sm:h-28 sm:w-28"
+  />
+  <p class="nb-tag bg-grass text-paper mb-5 inline-block px-2 py-0.5">
+    USTC 学生自组织
+  </p>
+  <h1
+    class="font-display text-5xl leading-[1.15] font-black tracking-tight sm:text-7xl"
+  >
+    让喜欢<span class="bg-snail text-paper px-2">折腾</span>的人<br
+      class="hidden sm:block"
+    />
+    凑在一起<span class="bg-lemon px-2">折腾</span>。
+  </h1>
+  <p class="text-ink-soft mt-6 max-w-xl text-lg">
+    蜗壳进阶联盟——讲座、黑客松、工作坊、校友讲坛、深度访谈。爬得慢没关系，方向对了就在前进。
+  </p>
+</section>

@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import SectionTitle from "../../components/SectionTitle.astro";
+import DialogueCard from "../../components/DialogueCard.astro";
+
+const dialogues = (await getCollection("dialogues")).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base
+  title={`访谈 — 蜗壳进阶联盟`}
+  description="与走过路的人聊天：蜗壳深度访谈栏目。"
+>
+  <div class="pt-12">
+    <SectionTitle no="DL" title="深度访谈" en="DIALOGUES" />
+  </div>
+  <p class="text-ink-soft mb-8 max-w-xl">
+    和走过路的人认真聊一次。职业选择、行业判断、踩过的坑——都以对话的形式留在这里。
+  </p>
+  <div class="grid grid-cols-1 gap-4">
+    {dialogues.map((d) => <DialogueCard dialogue={d} />)}
+  </div>
+</Base>

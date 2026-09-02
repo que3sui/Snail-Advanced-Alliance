@@ -1,0 +1,111 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import TagPill from "../../components/TagPill.astro";
+
+export async function getStaticPaths() {
+  const events = (await getCollection("events")).sort(
+    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+  );
+  return events.map((event, i) => ({
+    params: { slug: event.id },
+    props: {
+      event,
+      newer: i > 0 ? events[i - 1] : null,
+      older: i < events.length - 1 ? events[i + 1] : null,
+    },
+  }));
+}
+
+const { event, newer, older } = Astro.props;
+const { Content } = await render(event);
+const base = import.meta.env.BASE_URL;
+const dateStr = event.data.date.toLocaleDateString("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<Base
+  title={`${event.data.title} — 蜗壳进阶联盟`}
+  description={event.data.summary}
+>
+  <article class="pt-12">
+    <div class="mb-4 flex flex-wrap items-center gap-3">
+      <TagPill tag={event.data.tag} />
+      <span class="font-mono text-sm opacity-60">{dateStr}</span>
+      {
+        event.data.venue && (
+          <span class="font-mono text-sm opacity-60">
+            📍 {event.data.venue}
+          </span>
+        )
+      }
+    </div>
+
+    <h1 class="font-display text-3xl leading-tight font-black sm:text-5xl">
+      {event.data.title}
+    </h1>
+
+    {
+      (event.data.guest || event.data.guestTitle) && (
+        <p class="border-2.5 border-ink bg-lemon mt-4 inline-block px-3 py-1.5 font-bold">
+          {event.data.guest && `嘉宾：${event.data.guest}`}
+          {event.data.guest && event.data.guestTitle && " · "}
+          {event.data.guestTitle}
+        </p>
+      )
+    }
+
+    {
+      event.data.links && event.data.links.length > 0 && (
+        <div class="mt-6 flex flex-wrap gap-3">
+          {event.data.links.map(({ label, url }) => (
+            <a
+              href={url}
+              target="_blank"
+              rel="noopener"
+              class="nb-btn bg-white px-4 py-2 text-sm no-underline"
+            >
+              {label} ↗
+            </a>
+          ))}
+        </div>
+      )
+    }
+
+    <div
+      class="nb-card prose prose-neutral mt-8 max-w-none bg-white p-6 sm:p-10"
+    >
+      <Content />
+    </div>
+
+    <nav class="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2">
+      {
+        newer && (
+          <a
+            href={`${base}events/${newer.id}/`}
+            class="nb-flat bg-cream hover:bg-lemon p-4 no-underline transition-colors"
+          >
+            <span class="font-mono text-xs opacity-60">较新 →</span>
+            <p class="font-bold">{newer.data.title}</p>
+          </a>
+        )
+      }
+      {
+        older ? (
+          <a
+            href={`${base}events/${older.id}/`}
+            class="nb-flat bg-cream hover:bg-lemon p-4 text-right no-underline transition-colors sm:col-start-2"
+          >
+            <span class="font-mono text-xs opacity-60">← 较早</span>
+            <p class="font-bold">{older.data.title}</p>
+          </a>
+        ) : (
+          <span />
+        )
+      }
+    </nav>
+  </article>
+</Base>

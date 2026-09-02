@@ -1,0 +1,22 @@
+---
+interface Props {
+  no: string;
+  title: string;
+  en?: string;
+}
+const { no, title, en } = Astro.props;
+---
+
+<div class="mb-8 flex items-end gap-3">
+  <span class="nb-tag bg-lemon px-2 py-1 text-base" style="font-size: 0.9rem;"
+    >{no}</span
+  >
+  <h2 class="font-display text-3xl font-black tracking-wide">{title}</h2>
+  {
+    en && (
+      <span class="ml-auto font-mono text-xs tracking-[0.3em] opacity-50">
+        {en}
+      </span>
+    )
+  }
+</div>
