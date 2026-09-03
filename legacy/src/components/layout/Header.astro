@@ -6,11 +6,7 @@ const currentPath = Astro.url.pathname;
 const lang = currentPath.startsWith("/en") ? "en" : "zh";
 ---
 
-<header
-  class="header"
-  id="header"
-  transition:name="header"
->
+<header class="header" id="header" transition:name="header">
   <nav
     class="mx-auto flex max-w-[var(--content-max)] items-center justify-between px-6 py-3"
   >
